@@ -13,7 +13,7 @@
   --sky: #0097D8;
   --white: #FFFFFF;
   --bg: #F0F4F9;
-  --sidebar: #294795;
+  --sidebar: #FFFFFF;
   --sidebar-w: 230px;
   --card: #FFFFFF;
   --text: #1A2340;
@@ -61,7 +61,6 @@
   --text-muted: #94A3B8;
   --border: #334155;
   --sidebar: #1E293B;
-  --primary-light: #1E3A5F;
   --shadow: 0 1px 8px rgba(0,0,0,.3);
   --shadow-md: 0 4px 20px rgba(0,0,0,.4);
   --reco-card-bg: #1E293B;
@@ -85,12 +84,27 @@
   --reco-hover-bg: #273549;
   --reco-timestamp-color: #475569;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+.dark .sb-logo{border-bottom:1px solid #334155}
+.dark .sb-logo-text{color:#E2E8F0}
+.dark .sb-logo-sub{color:#64748B}
+.dark .sb-user{background:#0F172A;border-color:#334155}
+.dark .sb-user:hover{background:#1E3A5F;border-color:#2563EB}
+.dark .sb-user-name{color:#E2E8F0}
+.dark .sb-user-role{color:#64748B}
+.dark .sb-section-label{color:#475569}
+.dark .sb-item{color:#64748B}
+.dark .sb-item:hover{background:#0F172A;color:#CBD5E1}
+.dark .sb-item.active{background:#1E3A5F;color:#93C5FD}
+.dark .sb-bottom{border-top:1px solid #334155}
+.dark .sb-toggle{background:#1E293B;border-color:#334155}
+.dark .sb-toggle:hover{background:#0F172A;border-color:#475569}
+.dark .sb-toggle svg{stroke:#94A3B8}
+
 html,body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:13.5px;line-height:1.55;transition:background .2s,color .2s}
 
 /* ===== LAYOUT ===== */
 .app{display:flex;min-height:100vh}
-.sidebar{width:var(--sidebar-w);background:var(--sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:width .25s cubic-bezier(.4,0,.2,1),transform .25s cubic-bezier(.4,0,.2,1)}
+.sidebar{width:var(--sidebar-w);background:var(--sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:width .25s cubic-bezier(.4,0,.2,1),transform .25s cubic-bezier(.4,0,.2,1);border-right:1px solid var(--border);box-shadow:2px 0 12px rgba(41,71,149,.06)}
 .sidebar.collapsed{width:54px}
 .sidebar.collapsed .sb-logo-text,.sidebar.collapsed .sb-user-name,.sidebar.collapsed .sb-user-role,.sidebar.collapsed .sb-user-badge,.sidebar.collapsed .sb-item span,.sidebar.collapsed .sb-count,.sidebar.collapsed .sb-section-label,.sidebar.collapsed .sb-logo-sub{display:none}
 .sidebar.collapsed .sb-item{justify-content:center;padding:8px 0}
@@ -103,15 +117,15 @@ html,body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:
 .content{padding:20px 24px;flex:1}
 
 /* ===== SIDEBAR ===== */
-.sb-logo{padding:18px 16px 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sb-logo{padding:18px 16px 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid #E8ECF4}
 .sb-logo-icon{width:32px;height:32px;background:var(--sky);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sb-logo-icon svg{width:17px;height:17px;fill:#fff}
-.sb-logo-text{font-weight:800;font-size:15px;color:#fff;letter-spacing:-.01em}
-.sb-logo-sub{font-size:10px;font-weight:400;color:rgba(255,255,255,.5);display:block;letter-spacing:.02em}
+.sb-logo-text{font-weight:800;font-size:15px;color:var(--navy);letter-spacing:-.01em}
+.sb-logo-sub{font-size:10px;font-weight:400;color:var(--text-muted);display:block;letter-spacing:.02em}
 
-.sb-toggle{position:absolute;top:14px;right:-14px;width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:101;box-shadow:0 2px 8px rgba(0,0,0,.15);transition:.2s}
-.sb-toggle:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.4)}
-.sb-toggle svg{width:11px;height:11px;stroke:rgba(255,255,255,.9);transition:transform .25s}
+.sb-toggle{position:absolute;top:14px;right:-14px;width:26px;height:26px;border-radius:6px;background:#fff;backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:101;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:.2s}
+.sb-toggle:hover{background:var(--bg);border-color:var(--primary)}
+.sb-toggle svg{width:11px;height:11px;stroke:var(--text-muted);transition:transform .25s}
 .sidebar.collapsed .sb-toggle svg{transform:rotate(180deg)}
 /* Glass topbar */
 .topbar{background:rgba(255,255,255,.82);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%)}
@@ -119,27 +133,33 @@ html,body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:
 /* Glass panel header */
 .panel-hdr{background:linear-gradient(135deg,#1d3a80 0%,#0070B7 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
 
-.sb-user{padding:10px 12px;margin:10px 10px 6px;background:rgba(255,255,255,.08);border-radius:6px;cursor:pointer;transition:.2s}
-.sb-user:hover{background:rgba(255,255,255,.13)}
+.sb-user{padding:10px 12px;margin:10px 10px 6px;background:var(--bg);border-radius:6px;cursor:pointer;transition:.2s;border:1px solid var(--border)}
+.sb-user:hover{background:#E8F0FB;border-color:#c7d2fe}
 .sb-user-row{display:flex;align-items:center;gap:9px}
 .sb-avatar{width:30px;height:30px;border-radius:6px;background:var(--sky);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0}
-.sb-user-name{font-size:12px;font-weight:700;color:#fff;line-height:1.2}
-.sb-user-role{font-size:10px;color:rgba(255,255,255,.5)}
+.sb-user-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.2}
+.sb-user-role{font-size:10px;color:var(--text-muted)}
 .sb-user-badge{margin-left:auto;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:800;background:var(--sky);color:#fff;letter-spacing:.03em}
 
-.sb-section-label{padding:10px 14px 3px;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em}
+.sb-section-label{padding:10px 14px 3px;font-size:9.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em}
 
 .sb-nav{padding:0 8px;flex:1;overflow-y:auto}
 .sb-nav::-webkit-scrollbar{width:0}
-.sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.55);transition:.15s;margin-bottom:1px;position:relative;white-space:nowrap;overflow:hidden}
-.sb-item:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.9)}
-.sb-item.active{background:rgba(255,255,255,.14);color:#fff}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--text-muted);transition:.15s;margin-bottom:1px;position:relative;white-space:nowrap;overflow:hidden}
+.sb-item:hover{background:var(--bg);color:var(--text)}
+.sb-item.active{background:#EEF2FF;color:var(--navy)}
 .sb-item.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:55%;background:var(--sky);border-radius:0 2px 2px 0}
-.sb-item svg{width:15px;height:15px;flex-shrink:0;opacity:.7;min-width:15px}
+.sb-item svg{width:15px;height:15px;flex-shrink:0;opacity:.6;min-width:15px}
 .sb-item.active svg{opacity:1}
 .sb-item .sb-count{margin-left:auto;background:var(--sky);color:#fff;border-radius:3px;padding:1px 5px;font-size:10px;font-weight:700}
 
-.sb-bottom{padding:10px 8px;border-top:1px solid rgba(255,255,255,.08)}
+/* Sidebar tooltip when collapsed */
+.sidebar.collapsed .sb-item{position:relative}
+.sb-item-tooltip{display:none;position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);background:#1A2340;color:#fff;border-radius:5px;padding:5px 10px;font-size:12px;font-weight:600;white-space:nowrap;z-index:200;pointer-events:none;box-shadow:0 3px 12px rgba(0,0,0,.25)}
+.sb-item-tooltip::before{content:'';position:absolute;right:100%;top:50%;transform:translateY(-50%);border:5px solid transparent;border-right-color:#1A2340}
+.sidebar.collapsed .sb-item:hover .sb-item-tooltip{display:block}
+
+.sb-bottom{padding:10px 8px;border-top:1px solid var(--border)}
 
 /* ===== TOPBAR ===== */
 .tb-page-title{font-size:15px;font-weight:800;letter-spacing:-.02em}
@@ -219,6 +239,8 @@ html,body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:
 .kpi-value{font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
 .kpi-sub{font-size:10.5px;color:var(--text-muted);margin-top:4px}
 .kpi-stripe{position:absolute;right:0;top:0;bottom:0;width:4px}
+.kpi-sparkline{margin-top:10px;height:44px;position:relative}
+.kpi-sparkline canvas{display:block;width:100%!important;height:44px!important}
 
 .tbl-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
@@ -257,7 +279,11 @@ tr:hover td{background:var(--bg);transition:.1s}
 .filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
 .filter-row .form-input{width:auto;font-size:12px;padding:6px 9px}
 
-.empty-state{border:1.5px dashed var(--border);border-radius:var(--r);padding:22px;text-align:center;color:var(--text-muted);background:var(--bg);font-size:12.5px}
+.empty-state{border:1.5px dashed var(--border);border-radius:var(--r);padding:32px 22px;text-align:center;color:var(--text-muted);background:var(--bg);font-size:12.5px}
+.empty-state .empty-icon{width:52px;height:52px;margin:0 auto 12px;background:var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:.6}
+.empty-state .empty-icon svg{width:26px;height:26px}
+.empty-state .empty-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px}
+.empty-state .empty-sub{font-size:12px;color:var(--text-muted);margin-bottom:12px}
 
 .toast{position:fixed;bottom:20px;right:20px;background:#1A2340;color:#f1f5f9;border-radius:6px;padding:10px 16px;font-size:12.5px;font-weight:600;box-shadow:var(--shadow-md);z-index:999;transform:translateY(60px);opacity:0;transition:.25s;max-width:300px}
 .toast.show{transform:translateY(0);opacity:1}
@@ -487,15 +513,58 @@ tr:hover td{background:var(--bg);transition:.1s}
 .pg-btn:disabled{opacity:.4;cursor:not-allowed}
 
 /* ===== BRANCH PERFORMANCE MATRIX ===== */
-.rank-badge{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff}
-.rank-1{background:linear-gradient(135deg,#F59E0B,#D97706)}
-.rank-2{background:linear-gradient(135deg,#94A3B8,#64748B)}
-.rank-3{background:linear-gradient(135deg,#CD7F32,#A05C20)}
-.rank-n{background:var(--text-muted)}
+.rank-badge{display:inline-flex;align-items:center;font-weight:700;font-size:13px;color:var(--text-muted);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.rank-1{color:var(--text);font-weight:800}
+.rank-2{color:var(--text);font-weight:700}
+.rank-3{color:var(--text-muted);font-weight:700}
+.rank-n{color:var(--border)}
 .perf-bar{height:6px;border-radius:999px;background:var(--border);overflow:hidden;margin-top:3px}
 .perf-bar-inner{height:100%;border-radius:999px;transition:width .5s}
 
 @media(max-width:1100px){.g4{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr}}
+
+/* ===== OVERVIEW ZONES ===== */
+.zone-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.zone-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.zone-section{margin-bottom:20px}
+
+/* ===== SEARCH DROPDOWN ===== */
+.search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-md);z-index:300;display:none;max-height:380px;overflow-y:auto}
+.search-dropdown.show{display:block}
+.search-result-group{padding:8px 12px 4px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);border-bottom:1px solid var(--border);background:var(--bg)}
+.search-result-item{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;transition:.1s;border-bottom:1px solid var(--border)}
+.search-result-item:hover{background:var(--bg)}
+.search-result-item:last-child{border-bottom:0}
+.search-result-icon{width:28px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.search-result-title{font-size:12.5px;font-weight:700;color:var(--text);line-height:1.3}
+.search-result-sub{font-size:11px;color:var(--text-muted);margin-top:1px}
+.search-no-result{padding:24px;text-align:center;color:var(--text-muted);font-size:12.5px}
+
+/* ===== FUNNEL MINI PROGRESS (pipeline stage indicator) ===== */
+.stage-funnel{display:flex;gap:2px;margin-top:4px}
+.stage-funnel-step{height:4px;flex:1;border-radius:1px;background:var(--border);transition:.3s}
+.stage-funnel-step.done{background:var(--success)}
+.stage-funnel-step.active{background:var(--primary)}
+
+/* ===== EXPORT BUTTON ===== */
+.btn-export{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 12px;cursor:pointer;font:inherit;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:5px;transition:.15s}
+.btn-export:hover{background:var(--bg);border-color:var(--primary);color:var(--primary)}
+
+/* ===== AI RECO PANEL ===== */
+.ai-reco-card{padding:16px}
+.ai-reco-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.ai-reco-title-wrap{display:flex;align-items:center;gap:10px}
+.ai-reco-icon-wrap{width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,var(--navy),var(--sky));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ai-reco-title{font-size:13px;font-weight:700;color:var(--text);line-height:1.3}
+.ai-reco-sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+.ai-reco-btn{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border);background:var(--bg);color:var(--text-muted);border-radius:var(--r-sm);padding:6px 12px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;flex-shrink:0}
+.ai-reco-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
+.ai-reco-placeholder{padding:14px;background:var(--bg);border-radius:var(--r-sm);font-size:12px;color:var(--text-muted)}
+.ai-reco-placeholder strong{color:var(--text)}
+
+
+.reco-dismiss-btn{margin-left:auto;border:0;background:transparent;color:var(--text-muted);cursor:pointer;padding:3px 7px;border-radius:4px;font-size:11px;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+.reco-dismiss-btn:hover{background:var(--bg);color:var(--danger)}
 
 /* ===== RESPONSIVE MOBILE ===== */
 @media(max-width:760px){
@@ -561,6 +630,9 @@ tr:hover td{background:var(--bg);transition:.1s}
   [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
   [style*="minmax(320"]{grid-template-columns:1fr!important}
   [style*="minmax(280"]{grid-template-columns:1fr!important}
+  /* Force g4 on mobile */
+  .g4{grid-template-columns:1fr 1fr!important}
+  .g3{grid-template-columns:1fr 1fr!important}
   /* ── TABLE ── */
   .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
   table{font-size:11.5px;min-width:560px}
@@ -592,6 +664,8 @@ tr:hover td{background:var(--bg);transition:.1s}
   /* ── SIDEBAR ── */
   .sb-toggle{display:none}
   .desk-sb-btn{display:none!important}
+  /* Show mobile search */
+  .mob-search-btn{display:flex!important}
   /* ── SEC-HEAD: stack title & wrap action buttons ── */
   .sec-head{flex-direction:column;align-items:flex-start}
   .sec-head > *:last-child{flex-wrap:wrap;width:100%}
@@ -600,10 +674,10 @@ tr:hover td{background:var(--bg);transition:.1s}
 }
 
 @media(max-width:480px){
-  .g4,.g3{grid-template-columns:1fr 1fr}
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important}
-  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr 1fr!important}
-  [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr 1fr!important}
+  .g4,.g3{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
   [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
   .kpi-value{font-size:18px}
 }
@@ -716,9 +790,13 @@ tr:hover td{background:var(--bg);transition:.1s}
         </div>
       </div>
       <div class="tb-right">
-        <div class="tb-search">
+        <div class="tb-icon-btn mob-search-btn" id="mobSearchBtn" onclick="toggleMobileSearch()" title="Cari" style="display:none">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input id="globalSearch" placeholder="Cari klien, PIC, project..."/>
+        </div>
+        <div class="tb-search" style="position:relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="globalSearch" placeholder="Cari klien, PIC, project..." oninput="handleGlobalSearch(this.value)" onblur="setTimeout(closeSearchDropdown,200)" onfocus="handleGlobalSearch(this.value)"/>
+          <div class="search-dropdown" id="searchDropdown"></div>
         </div>
         <div class="nm-toggle" onclick="toggleNightMode()" title="Toggle Night Mode">
           <div class="nm-toggle-knob" id="nmKnob">🌙</div>
@@ -842,6 +920,14 @@ tr:hover td{background:var(--bg);transition:.1s}
 </button>
 
 <div class="toast" id="toast"></div>
+
+<!-- MOBILE SEARCH OVERLAY -->
+<div id="mobileSearchOverlay" style="display:none;position:fixed;top:0;left:0;right:0;background:var(--card);border-bottom:1px solid var(--border);padding:10px 14px;z-index:500;display:none;align-items:center;gap:8px;box-shadow:var(--shadow-md)">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--text-muted);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <input id="mobileSearchInput" placeholder="Cari klien, PIC, project..." style="flex:1;border:0;background:transparent;font:inherit;font-size:13px;color:var(--text);outline:none" oninput="handleGlobalSearch(this.value)" />
+  <button onclick="closeMobileSearch()" style="border:0;background:transparent;color:var(--text-muted);cursor:pointer;padding:4px;font-size:13px">✕</button>
+  <div class="search-dropdown" id="mobileSearchDropdown" style="position:fixed;top:52px;left:0;right:0;border-radius:0;border-left:0;border-right:0;max-height:60vh;overflow-y:auto"></div>
+</div>
 
 <script>
 /* ===================== FLOATING CHAT ===================== */
@@ -1083,15 +1169,38 @@ function localAiReply(question){
   );
 }
 
+function formatAiText(text){
+  // Convert markdown table to HTML table
+  let t=text||'';
+  // Tables: detect | separated lines
+  t=t.replace(/(\|[^\n]+\|\n\|[-| :]+\|\n(?:\|[^\n]+\|\n?)+)/g,match=>{
+    const rows=match.trim().split('\n').filter(r=>r.trim());
+    if(rows.length<3)return match;
+    const headers=rows[0].split('|').filter(c=>c.trim()).map(c=>`<th style="padding:5px 9px;border:1px solid var(--border);background:var(--bg);font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em">${c.trim()}</th>`).join('');
+    const dataRows=rows.slice(2).map(r=>{
+      const cells=r.split('|').filter(c=>c.trim()).map(c=>`<td style="padding:5px 9px;border:1px solid var(--border);font-size:12px">${c.trim()}</td>`).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    return `<div style="overflow-x:auto;margin:8px 0"><table style="border-collapse:collapse;width:100%;font-size:12px"><thead><tr>${headers}</tr></thead><tbody>${dataRows}</tbody></table></div>`;
+  });
+  // Bold
+  t=t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  // Bullet lists
+  t=t.replace(/(^|\n)(•|\-) (.+)/g,'$1<div style="display:flex;gap:6px;align-items:flex-start;margin:2px 0"><span style="color:var(--primary);font-weight:800;flex-shrink:0">•</span><span>$3</span></div>');
+  // Numbered lists
+  t=t.replace(/(^|\n)(\d+)\. (.+)/g,'$1<div style="display:flex;gap:6px;align-items:flex-start;margin:2px 0"><span style="background:var(--primary);color:#fff;border-radius:50%;width:16px;height:16px;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">$2</span><span>$3</span></div>');
+  // Newlines
+  t=t.replace(/\n/g,'<br>');
+  return t;
+}
+
 function appendAiMsg(role,text){
   const el=document.getElementById('aiMessages');if(!el)return;
   const now=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
   const isUser=role==='user';
   const div=document.createElement('div');
   div.className='ai-msg'+(isUser?' user':'');
-  const formatted=(text||'')
-    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\n/g,'<br>');
+  const formatted=isUser?(text||'').replace(/\n/g,'<br>'):formatAiText(text);
   const avHtml=isUser?'':'<div class="ai-msg-av">AI</div>';
   div.innerHTML=avHtml+'<div><div class="ai-msg-bubble">'+formatted+'</div><div class="ai-msg-time">'+now+'</div></div>';
   el.appendChild(div);
@@ -1398,7 +1507,7 @@ function toggleNightMode(){
   else{document.documentElement.classList.remove('dark');knob.textContent='🌙';}
   // Re-render charts after mode switch
   setTimeout(()=>{
-    if(currentPage==='pageOverview')renderOvCharts();
+    if(currentPage==='pageOverview'){renderOvCharts();renderKpiSparklines();}
     if(currentPage==='pagePipeline')renderPipelineCharts();
   },100);
 }
@@ -1407,12 +1516,84 @@ function toggleNightMode(){
 function buildNotifList(){
   const pending=APPROVAL_QUEUE.filter(x=>x.status==='pending');
   const $list=$('notifList');
-  const priorityColors={High:'#FEE2E2',Medium:'#FEF3C7',Low:'#F1F5F9'};
   let html='';
-  if(NEXT_ACTIONS.length){
-    NEXT_ACTIONS.forEach(n=>{
+  let totalUrgent=0;
+
+  // === DYNAMIC NOTIFICATIONS ===
+  const dynamicNotifs=[];
+
+  // 1. Project deadline dalam 7 hari
+  const now=new Date();
+  WON_PROJECTS.filter(p=>p.status!=='Completed').forEach(p=>{
+    if(p.endTarget){
+      const parts=p.endTarget.split(' ');
+      const months={'Jan':0,'Feb':1,'Mar':2,'Apr':3,'Mei':4,'Jun':5,'Jul':6,'Agu':7,'Sep':8,'Okt':9,'Nov':10,'Des':11};
+      if(parts.length>=3){
+        const d=new Date(parseInt(parts[2]),months[parts[1]]||0,parseInt(parts[0]));
+        const diff=Math.round((d-now)/(1000*60*60*24));
+        if(diff>=0&&diff<=7){
+          dynamicNotifs.push({priority:'High',icon:'⏰',title:`Deadline minggu ini: ${p.client}`,sub:`Project ${p.id} · ${p.branch} · Progress ${p.progress}%`,time:`${diff===0?'Hari ini':diff+' hari lagi'}`,page:'pageProject',category:'Deadline'});
+          totalUrgent++;
+        }
+      }
+    }
+  });
+
+  // 2. Pipeline stuck >30 days (simulate with stage=lead or qualified without note updates)
+  const allP=getAllProspects();
+  const stuckP=allP.filter(p=>p.stage==='lead'||p.stage==='qualified').slice(0,2);
+  if(stuckP.length){
+    dynamicNotifs.push({priority:'Medium',icon:'⚠️',title:`${stuckP.length} prospek stagnan di tahap awal`,sub:`${stuckP.map(p=>p.klien.substring(0,20)).join(', ')}`,time:'Review diperlukan',page:'pagePipeline',category:'Pipeline'});
+  }
+
+  // 3. Critical projects
+  const critProj=WON_PROJECTS.filter(p=>p.health==='Critical');
+  critProj.forEach(p=>{
+    dynamicNotifs.push({priority:'High',icon:'🔴',title:`Project Critical: ${p.client}`,sub:`${p.branch} · Blocker: ${p.blocker.substring(0,35)}`,time:'Eskalasi segera',page:'pageProject',category:'Critical'});
+    totalUrgent++;
+  });
+
+  // 4. Pending approval >3 hari (simulate)
+  const oldPending=pending.filter((_,i)=>i<2);
+  if(oldPending.length>0){
+    dynamicNotifs.push({priority:'Medium',icon:'📋',title:`${pending.length} item menunggu approval`,sub:`Termasuk: ${pending[0]?.item?.substring(0,35)||'—'}`,time:`${pending.length} item pending`,page:'pagePipeline',category:'Approval'});
+    totalUrgent+=pending.length;
+  }
+
+  // 5. Negotiation prospects (near closing)
+  const negP=allP.filter(p=>p.stage==='negotiation');
+  if(negP.length){
+    dynamicNotifs.push({priority:'Medium',icon:'🤝',title:`${negP.length} prospek dalam negosiasi`,sub:`Total nilai: Rp ${fmt(negP.reduce((a,p)=>a+p.nilai,0))} Jt — siap closing`,time:'Follow-up minggu ini',page:'pagePipeline',category:'Peluang'});
+  }
+
+  // Sort by priority
+  const prioOrder={High:0,Medium:1,Low:2};
+  dynamicNotifs.sort((a,b)=>prioOrder[a.priority]-prioOrder[b.priority]);
+
+  if(dynamicNotifs.length){
+    html+=`<div style="padding:6px 14px 4px;background:var(--bg);border-bottom:1px solid var(--border);font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">Smart Alerts (${dynamicNotifs.length})</div>`;
+    dynamicNotifs.slice(0,6).forEach(n=>{
+      const bgMap={High:'var(--danger-light)',Medium:'var(--warning-light)',Low:'var(--primary-light)'};
       html+=`<div class="notif-item" onclick="closeNotif();navTo('${n.page}')">
-        <div class="notif-item-icon" style="background:${priorityColors[n.priority]}">${n.priority==='High'?'🔴':n.priority==='Medium'?'🟡':'🔵'}</div>
+        <div class="notif-item-icon" style="background:${bgMap[n.priority]||'#F1F5F9'}">${n.icon}</div>
+        <div>
+          <div class="notif-item-title">${n.title}</div>
+          <div class="notif-item-sub">${n.sub}</div>
+          <div class="notif-item-time" style="display:flex;align-items:center;gap:4px">
+            <span class="badge badge-${n.priority==='High'?'red':n.priority==='Medium'?'amber':'gray'}" style="font-size:9px;padding:1px 5px">${n.category}</span>
+            <span>${n.time}</span>
+          </div>
+        </div>
+      </div>`;
+    });
+  }
+
+  // Also show old static NEXT_ACTIONS if any
+  if(NEXT_ACTIONS&&NEXT_ACTIONS.length){
+    html+=`<div style="padding:6px 14px 4px;background:var(--bg);border-bottom:1px solid var(--border);font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">Rencana Aksi</div>`;
+    NEXT_ACTIONS.slice(0,2).forEach(n=>{
+      html+=`<div class="notif-item" onclick="closeNotif();navTo('${n.page}')">
+        <div class="notif-item-icon" style="background:#F1F5F9">${n.priority==='High'?'🔴':n.priority==='Medium'?'🟡':'🔵'}</div>
         <div>
           <div class="notif-item-title">${n.action}</div>
           <div class="notif-item-sub">${n.owner} · Due ${n.due}</div>
@@ -1421,24 +1602,10 @@ function buildNotifList(){
       </div>`;
     });
   }
-  if(pending.length){
-    html+=`<div style="padding:6px 14px;background:var(--bg);border-bottom:1px solid var(--border);font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">Pending Approval (${pending.length})</div>`;
-    pending.slice(0,3).forEach(item=>{
-      const page=item.type==='Swasta Deal'?'pageSwasta':item.type==='Update Progress'?'pageProject':'pagePipeline';
-      html+=`<div class="notif-item" onclick="closeNotif();navTo('${page}')">
-        <div class="notif-item-icon" style="background:#FEF3C7">📋</div>
-        <div>
-          <div class="notif-item-title">${item.type}: ${item.item.substring(0,40)}...</div>
-          <div class="notif-item-sub">${item.submittedBy}</div>
-          <div class="notif-item-time">${item.submittedAt}</div>
-        </div>
-      </div>`;
-    });
-  }
-  $list.innerHTML=html||'<div style="padding:14px;text-align:center;font-size:12px;color:var(--text-muted)">Tidak ada notifikasi</div>';
-  const totalNotif=NEXT_ACTIONS.filter(a=>a.priority==='High').length+pending.length;
+
+  $list.innerHTML=html||'<div style="padding:14px;text-align:center;font-size:12px;color:var(--text-muted)">Tidak ada notifikasi aktif</div>';
   const dot=$('notifDot');
-  if(dot)dot.style.display=totalNotif>0?'block':'none';
+  if(dot)dot.style.display=totalUrgent>0?'block':'none';
 }
 function toggleNotif(){const d=$('notifDropdown');d.classList.toggle('show');if(d.classList.contains('show'))buildNotifList();}
 function closeNotif(){$('notifDropdown').classList.remove('show');}
@@ -1452,13 +1619,18 @@ function doLogin(){
   const user=$('loginUser').value.trim()||'demo_user';
   const emp=EMPLOYEES.find(e=>e.branch===(branch==='all'?'Pusat':branch)&&e.role===(role==='kabag'?'KABAG':'Kepala SBU'))||EMPLOYEES[0];
   auth={loggedIn:true,role,branch,username:user,name:emp?emp.name:user,empId:emp?emp.id:''};
+  try{sessionStorage.setItem('lsi_auth',JSON.stringify(auth));}catch(e){}
   $('loginScreen').style.display='none';
   $('app').style.display='flex';
   initApp();
   showFloatChat();
   toast(`👋 Selamat datang, ${auth.name}!`,'success');
 }
-function doLogout(){auth={loggedIn:false};$('loginScreen').style.display='flex';$('app').style.display='none';const btn=document.getElementById('floatChatBtn');if(btn)btn.style.display='none';const panel=document.getElementById('floatChatPanel');if(panel)panel.classList.remove('open');floatChatOpen=false;}
+function doLogout(){
+  auth={loggedIn:false};
+  try{sessionStorage.removeItem('lsi_auth');}catch(e){}
+  $('loginScreen').style.display='flex';$('app').style.display='none';const btn=document.getElementById('floatChatBtn');if(btn)btn.style.display='none';const panel=document.getElementById('floatChatPanel');if(panel)panel.classList.remove('open');floatChatOpen=false;
+}
 
 /* ===================== SIDEBAR ===================== */
 const NAV_ICONS={
@@ -1513,6 +1685,7 @@ function initSidebar(){
       ${NAV_ICONS[item.icon]||''}
       <span>${item.label}</span>
       ${(item.count||0)>0?`<span class="sb-count">${item.count}</span>`:''}
+      <div class="sb-item-tooltip">${item.label}</div>
     </div>`).join('');
 
   buildNotifList();
@@ -1544,44 +1717,71 @@ function navTo(pageId){
 
 /* ===================== OVERVIEW ===================== */
 function renderOverview(){
-  const allP=getAllProspects();
+  const isKabag=auth.role==='kabag';
+  const branchFilter=isKabag&&auth.branch!=='all'?auth.branch:null;
+  const allP=branchFilter?getAllProspects().filter(p=>p.branch===branchFilter):getAllProspects();
   const totalPipe=allP.reduce((a,p)=>a+p.nilai,0);
   const contracts=allP.filter(p=>p.stage==='contract').length;
-  const pendingAQ=APPROVAL_QUEUE.filter(x=>x.status==='pending').length;
-  const activePrj=WON_PROJECTS.filter(p=>p.status!=='Completed').length;
-  const totalSwasta=SWASTA_DEALS.reduce((a,d)=>a+d.value,0);
-  const activeSwasta=SWASTA_DEALS.filter(d=>d.stage!=='closed').length;
-  const closedSwasta=SWASTA_DEALS.filter(d=>d.stage==='closed').length;
+  const pendingAQ=APPROVAL_QUEUE.filter(x=>x.status==='pending'&&(!branchFilter||x.branch===branchFilter)).length;
+  const activePrj=WON_PROJECTS.filter(p=>p.status!=='Completed'&&(!branchFilter||p.branch===branchFilter)).length;
+  const totalSwasta=SWASTA_DEALS.filter(d=>!branchFilter||d.branch===branchFilter).reduce((a,d)=>a+d.value,0);
+  const activeSwasta=SWASTA_DEALS.filter(d=>d.stage!=='closed'&&(!branchFilter||d.branch===branchFilter)).length;
+  const closedSwasta=SWASTA_DEALS.filter(d=>d.stage==='closed'&&(!branchFilter||d.branch===branchFilter)).length;
+  const roleLabel=isKabag?`<div style="display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--primary-light);border:1px solid #bfdbfe;border-radius:var(--r-sm);margin-bottom:14px;font-size:12px"><span>✏️</span><span><strong>Mode KABAG</strong> — Anda melihat data cabang <strong>${auth.branch==='all'?'Pusat (semua)':auth.branch}</strong>. Filter otomatis diterapkan.</span><button onclick="navTo('pagePipeline')" style="margin-left:auto;border:0;background:var(--primary);color:#fff;border-radius:4px;padding:3px 10px;cursor:pointer;font:inherit;font-size:11.5px;font-weight:700">+ Tambah Prospek</button></div>`:'';
 
   $('pageOverview').innerHTML=`
+    ${roleLabel}
+    <!-- ZONA 1: AT A GLANCE -->
+    <div class="zone-section">
+      <div class="zone-label">📊 At a Glance — KPI Utama</div>
     <div class="g g4" style="margin-bottom:16px">
       <div class="kpi-card">
         <div class="kpi-stripe" style="background:var(--navy)"></div>
-        <div class="kpi-icon" style="background:#EEF2FF"><svg viewBox="0 0 24 24" fill="none" stroke="#294795" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="kpi-label">Total Pipeline</div>
-        <div class="kpi-value" style="font-size:19px">Rp ${fmt(totalPipe)} Jt</div>
-        <div class="kpi-sub">Nilai peluang aktif</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div class="kpi-icon" style="background:#EEF2FF;margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="#294795" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="kpi-label">Total Pipeline</div>
+            <div class="kpi-value" style="font-size:19px">Rp ${fmt(totalPipe)} Jt</div>
+            <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--success);font-weight:700">↑ 12%</span> vs bulan lalu</div>
+          </div>
+        </div>
+        <div class="kpi-sparkline"><canvas id="kpiSparkPipeline"></canvas></div>
       </div>
       <div class="kpi-card">
         <div class="kpi-stripe" style="background:var(--success)"></div>
-        <div class="kpi-icon" style="background:#DCFCE7"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-        <div class="kpi-label">Kontrak Aktif</div>
-        <div class="kpi-value" style="color:var(--success)">${contracts}</div>
-        <div class="kpi-sub">Tahap kontrak</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div class="kpi-icon" style="background:#DCFCE7;margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="kpi-label">Kontrak Aktif</div>
+            <div class="kpi-value" style="color:var(--success)">${contracts}</div>
+            <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--success);font-weight:700">↑ 2</span> bulan ini</div>
+          </div>
+        </div>
+        <div class="kpi-sparkline"><canvas id="kpiSparkContract"></canvas></div>
       </div>
       <div class="kpi-card">
         <div class="kpi-stripe" style="background:var(--blue)"></div>
-        <div class="kpi-icon" style="background:#E8F4FD"><svg viewBox="0 0 24 24" fill="none" stroke="#0070B7" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <div class="kpi-label">Project Aktif</div>
-        <div class="kpi-value" style="color:var(--blue)">${activePrj}</div>
-        <div class="kpi-sub">Delivery berjalan</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div class="kpi-icon" style="background:#E8F4FD;margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="#0070B7" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <div class="kpi-label">Project Aktif</div>
+            <div class="kpi-value" style="color:var(--blue)">${activePrj}</div>
+            <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--blue);font-weight:700">↑ 1</span> delivery berjalan</div>
+          </div>
+        </div>
+        <div class="kpi-sparkline"><canvas id="kpiSparkProject"></canvas></div>
       </div>
       <div class="kpi-card">
         <div class="kpi-stripe" style="background:var(--warning)"></div>
-        <div class="kpi-icon" style="background:#FEF3C7"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <div class="kpi-label">Pending Approval</div>
-        <div class="kpi-value" style="color:var(--warning)">${pendingAQ}</div>
-        <div class="kpi-sub">Menunggu review</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div class="kpi-icon" style="background:#FEF3C7;margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <div class="kpi-label">Pending Approval</div>
+            <div class="kpi-value" style="color:var(--warning)">${pendingAQ}</div>
+            <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--warning);font-weight:700">!</span> menunggu review</div>
+          </div>
+        </div>
+        <div class="kpi-sparkline"><canvas id="kpiSparkApproval"></canvas></div>
       </div>
     </div>
 
@@ -1593,6 +1793,7 @@ function renderOverview(){
         <div class="kpi-label">Deal Swasta Aktif</div>
         <div class="kpi-value" style="color:#7C3AED">${activeSwasta}</div>
         <div class="kpi-sub">${closedSwasta} deal closed</div>
+        <div class="kpi-sparkline"><canvas id="kpiSparkSwasta"></canvas></div>
       </div>
       <div class="kpi-card">
         <div class="kpi-stripe" style="background:#0891B2"></div>
@@ -1600,6 +1801,7 @@ function renderOverview(){
         <div class="kpi-label">Total Pipeline Swasta</div>
         <div class="kpi-value" style="font-size:19px;color:#0891B2">Rp ${fmt(totalSwasta)} Jt</div>
         <div class="kpi-sub">Nilai deal swasta</div>
+        <div class="kpi-sparkline"><canvas id="kpiSparkSwastaPipe"></canvas></div>
       </div>
       <div class="kpi-card">
         <div class="kpi-stripe" style="background:#DB2777"></div>
@@ -1607,70 +1809,50 @@ function renderOverview(){
         <div class="kpi-label">Avg Conversion</div>
         <div class="kpi-value" style="color:#DB2777">${Math.round(BRANCHES_BASE.reduce((a,b)=>a+b.conversion,0)/BRANCHES_BASE.length)}%</div>
         <div class="kpi-sub">Rata-rata semua cabang</div>
+        <div class="kpi-sparkline"><canvas id="kpiSparkConversion"></canvas></div>
       </div>
     </div>
 
+    </div><!-- /.g.g3 swasta -->
+    </div><!-- /.zone-section -->
+
+    <!-- ZONA 2: TREND & ANALISIS -->
+    <div class="zone-section">
+      <div class="zone-label">Trend & Analisis Cabang</div>
     <!-- Branch Summary Cards -->
     <div style="margin-bottom:16px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <div>
-          <div style="font-size:13px;font-weight:800;letter-spacing:-.01em">📍 Ringkasan Per Cabang</div>
-          <div style="font-size:11px;color:var(--text-muted)">Snapshot kondisi terkini tiap cabang — klik untuk detail prospek</div>
-        </div>
-      </div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px">Klik cabang untuk lihat detail prospek</div>
       <div class="g g3" style="gap:10px">
         ${BRANCHES_BASE.map(b=>{
           const ps=BRANCH_PROSPECTS[b.name]||[];
           const contracts=ps.filter(p=>p.stage==='contract').length;
-          const negotiation=ps.filter(p=>p.stage==='negotiation').length;
-          const proposals=ps.filter(p=>p.stage==='proposal').length;
-          const topProspect=ps.reduce((a,p)=>(!a||p.nilai>a.nilai)?p:a,null);
           const branchProjects=WON_PROJECTS.filter(p=>p.branch===b.name);
           const criticalPrj=branchProjects.filter(p=>p.health==='Critical').length;
-          const watchPrj=branchProjects.filter(p=>p.health==='Watchlist').length;
-          const rankColor=b.rank===1?'#16A34A':b.rank===2?'#0070B7':b.rank===3?'#D97706':'#6B7A99';
-          const growthIcon=b.growth>=10?'🟢':b.growth>=5?'🟡':'⚪';
-          return `<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;cursor:pointer;transition:.15s;position:relative;overflow:hidden" onclick="openBranchPanel('${b.name}')" onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.borderColor='var(--primary)'" onmouseout="this.style.boxShadow='';this.style.borderColor='var(--border)'">
-            <div style="position:absolute;top:0;left:0;width:4px;height:100%;background:${rankColor}"></div>
-            <div style="padding-left:4px">
-              <!-- Header -->
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-                <div style="display:flex;align-items:center;gap:7px">
-                  <div style="font-size:14px;font-weight:800;color:var(--navy)">${b.name}</div>
-                  <span style="font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;background:${rankColor}22;color:${rankColor};border:1px solid ${rankColor}44">#${b.rank}</span>
-                </div>
-                <div style="font-size:10px;color:var(--text-muted)">${growthIcon} +${b.growth}% MoM</div>
+          const topProspect=ps.reduce((a,p)=>(!a||p.nilai>a.nilai)?p:a,null);
+          return `<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 14px 12px;cursor:pointer;transition:.15s" onclick="openBranchPanel('${b.name}')" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow=''">
+            <!-- Header -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <div style="font-size:13px;font-weight:800;color:var(--text)">${b.name}</div>
+              <span style="font-size:10px;font-weight:600;color:var(--text-muted)">#${b.rank} · +${b.growth}%</span>
+            </div>
+            <!-- Stats row -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+              <div>
+                <div style="font-size:15px;font-weight:800;color:var(--text)">${ps.length}</div>
+                <div style="font-size:10px;color:var(--text-muted);margin-top:1px">Prospek</div>
               </div>
-              <!-- KPI row -->
-              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
-                <div style="background:var(--bg);border-radius:5px;padding:7px;text-align:center">
-                  <div style="font-size:16px;font-weight:800;color:var(--primary)">${ps.length}</div>
-                  <div style="font-size:9.5px;color:var(--text-muted);font-weight:600">Prospek</div>
-                </div>
-                <div style="background:var(--bg);border-radius:5px;padding:7px;text-align:center">
-                  <div style="font-size:13px;font-weight:800;color:var(--navy)">Rp ${b.pipeline>=1000?Math.round(b.pipeline/1000)+'M':b.pipeline+'Jt'}</div>
-                  <div style="font-size:9.5px;color:var(--text-muted);font-weight:600">Pipeline</div>
-                </div>
-                <div style="background:var(--bg);border-radius:5px;padding:7px;text-align:center">
-                  <div style="font-size:16px;font-weight:800;color:var(--success)">${b.conversion}%</div>
-                  <div style="font-size:9.5px;color:var(--text-muted);font-weight:600">Konversi</div>
-                </div>
+              <div>
+                <div style="font-size:12px;font-weight:800;color:var(--text)">Rp ${b.pipeline>=1000?Math.round(b.pipeline/1000)+'M':b.pipeline+'Jt'}</div>
+                <div style="font-size:10px;color:var(--text-muted);margin-top:1px">Pipeline</div>
               </div>
-              <!-- Stage pills -->
-              <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px">
-                ${contracts>0?`<span style="background:#DCFCE7;color:#15803d;border:1px solid #bbf7d0;border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700">✅ ${contracts} Kontrak</span>`:''}
-                ${negotiation>0?`<span style="background:#FFF7ED;color:#c2410c;border:1px solid #fed7aa;border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700">🤝 ${negotiation} Negosiasi</span>`:''}
-                ${proposals>0?`<span style="background:#FEF3C7;color:#92400e;border:1px solid #fde68a;border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700">📄 ${proposals} Penawaran</span>`:''}
+              <div>
+                <div style="font-size:15px;font-weight:800;color:var(--text)">${b.conversion}%</div>
+                <div style="font-size:10px;color:var(--text-muted);margin-top:1px">Konversi</div>
               </div>
-              <!-- Project health -->
-              ${branchProjects.length>0?`<div style="display:flex;align-items:center;gap:6px;padding:6px 8px;background:${criticalPrj>0?'#FEE2E2':watchPrj>0?'#FEF3C7':'#DCFCE7'};border-radius:5px;margin-bottom:8px">
-                <span style="font-size:11px">${criticalPrj>0?'🔴':watchPrj>0?'🟡':'🟢'}</span>
-                <span style="font-size:10.5px;font-weight:600;color:${criticalPrj>0?'#991b1b':watchPrj>0?'#92400e':'#15803d'}">${criticalPrj>0?criticalPrj+' project Critical':watchPrj>0?watchPrj+' project Watchlist':branchProjects.length+' project On Track'}</span>
-              </div>`:''}
-              <!-- Top prospect -->
-              ${topProspect?`<div style="font-size:10px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Top Prospek</div>
-              <div style="font-size:11.5px;font-weight:700;color:var(--text);line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${topProspect.judul}</div>
-              <div style="font-size:10.5px;color:var(--text-muted)">Rp ${fmt(topProspect.nilai)} Jt · ${topProspect.klien}</div>`:''}
+            </div>
+            <!-- Simple status line -->
+            <div style="display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--border)">
+              <span style="font-size:10.5px;color:var(--text-muted)">${contracts} kontrak · ${branchProjects.length} project${criticalPrj>0?' · <span style="color:var(--danger);font-weight:700">'+criticalPrj+' critical</span>':''}</span>
             </div>
           </div>`;
         }).join('')}
@@ -1724,34 +1906,77 @@ function renderOverview(){
       </div>
     </div>
 
+    </div><!-- /.g.g2 project+chart -->
+    </div><!-- /.zone-section -->
+
+    <!-- ZONA 3: ACTION ITEMS -->
+    <div class="zone-section">
+      <div class="zone-label">Rekomendasi AI</div>
     <!-- AI Recommendations Panel -->
     <div id="aiRecoPanel" style="margin-top:16px">
-      <div class="card" style="border:1.5px solid #c7d2fe;background:linear-gradient(135deg,#f8f9ff 0%,#eef2ff 100%)">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <div style="display:flex;align-items:center;gap:9px">
-            <div style="width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,#294795,#0097D8);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="19" cy="5" r="3" fill="#fff" stroke="none"/></svg>
-            </div>
+      <div class="card ai-reco-card">
+        <div class="ai-reco-header">
+          <div class="ai-reco-title-wrap">
+            <div class="ai-reco-icon-wrap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
             <div>
-              <div style="font-size:13px;font-weight:800;color:#1e3a8a">✨ Rekomendasi AI</div>
-              <div style="font-size:10.5px;color:#6b7a99">Analisis real-time berbasis data sistem saat ini</div>
+              <div class="ai-reco-title">Rekomendasi AI — Overview</div>
+              <div class="ai-reco-sub">Analisis berbasis data pipeline dan project saat ini</div>
             </div>
           </div>
-          <button onclick="loadAIReco('overview')" style="border:1px solid #c7d2fe;background:#fff;color:#294795;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s" onmouseover="this.style.background='#eef2ff'" onmouseout="this.style.background='#fff'">
+          <button class="ai-reco-btn" onclick="loadAIReco('overview')">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.69"/></svg>
             Refresh
           </button>
         </div>
-        <div id="aiRecoContent">
-          <div style="display:flex;align-items:center;gap:10px;padding:16px;background:rgba(255,255,255,.6);border-radius:7px;border:1px solid #e0e7ff">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-            <span style="font-size:12px;color:#4b5563">Klik <strong>Refresh</strong> untuk memuat rekomendasi AI berdasarkan data pipeline dan project saat ini.</span>
-          </div>
+        <div id="aiRecoContent" class="ai-reco-placeholder">
+          Klik <strong>Refresh</strong> untuk memuat rekomendasi AI berdasarkan data pipeline dan project saat ini.
         </div>
       </div>
     </div>
+    </div><!-- /.zone-section -->
   `;
-  setTimeout(()=>{renderOvCharts();},50);
+  setTimeout(()=>{renderOvCharts();renderKpiSparklines();},50);
+}
+
+function renderKpiSparklines(){
+  // Destroy existing sparkline charts
+  ['kpiSparkPipeline','kpiSparkContract','kpiSparkProject','kpiSparkApproval',
+   'kpiSparkSwasta','kpiSparkSwastaPipe','kpiSparkConversion'].forEach(id=>{
+    if(charts[id]){charts[id].destroy();delete charts[id];}
+  });
+  const nm=nightMode;
+  function mkSpark(id,data,color,fill){
+    const el=document.getElementById(id);if(!el)return;
+    charts[id]=new Chart(el,{type:'line',data:{
+      labels:data.map((_,i)=>i),
+      datasets:[{data,borderColor:color,borderWidth:2,pointRadius:0,tension:.4,fill:fill?'origin':false,
+        backgroundColor:fill?color.replace(')',',0.12)').replace('rgb','rgba'):undefined}]
+    },options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},
+      plugins:{legend:{display:false},tooltip:{enabled:false}},
+      scales:{x:{display:false},y:{display:false,grace:'15%'}}}});
+  }
+  // Pipeline trend (6 bulan — simulasi growth)
+  const allP=getAllProspects();
+  const base=allP.reduce((a,p)=>a+p.nilai,0);
+  mkSpark('kpiSparkPipeline',[base*.72,base*.78,base*.80,base*.85,base*.91,base*.96,base],'rgb(41,71,149)',true);
+  // Kontrak aktif trend
+  const ct=allP.filter(p=>p.stage==='contract').length;
+  mkSpark('kpiSparkContract',[ct-3,ct-2,ct-2,ct-1,ct-1,ct,ct],'rgb(22,163,74)',true);
+  // Project aktif trend
+  const ap=WON_PROJECTS.filter(p=>p.status!=='Completed').length;
+  mkSpark('kpiSparkProject',[ap-2,ap-1,ap-1,ap,ap,ap+1,ap],'rgb(0,112,183)',true);
+  // Pending approval (fluktuatif)
+  const pa=APPROVAL_QUEUE.filter(x=>x.status==='pending').length;
+  mkSpark('kpiSparkApproval',[pa+3,pa+1,pa+4,pa+2,pa+3,pa+1,pa],'rgb(217,119,6)',false);
+  // Swasta aktif
+  const sw=SWASTA_DEALS.filter(d=>d.stage!=='closed').length;
+  mkSpark('kpiSparkSwasta',[sw-2,sw-1,sw,sw,sw+1,sw,sw],'rgb(124,58,237)',true);
+  // Pipeline swasta
+  const sp=SWASTA_DEALS.reduce((a,d)=>a+d.value,0);
+  mkSpark('kpiSparkSwastaPipe',[sp*.68,sp*.74,sp*.79,sp*.83,sp*.89,sp*.95,sp],'rgb(8,145,178)',true);
+  // Avg conversion
+  const ac=Math.round(BRANCHES_BASE.reduce((a,b)=>a+b.conversion,0)/BRANCHES_BASE.length);
+  mkSpark('kpiSparkConversion',[ac-4,ac-3,ac-2,ac-1,ac-1,ac,ac],'rgb(219,39,119)',false);
 }
 
 function renderOvCharts(){
@@ -1821,8 +2046,12 @@ function renderBranchPerf(){
 
     <div class="card" style="margin-bottom:14px">
       <div class="sec-head">
-        <div class="sec-head-left"><h3>Branch Performance Matrix</h3><p>Klik "Detail" untuk melihat breakdown prospek dan conversion rate</p></div>
-        <div class="filter-row" style="margin-bottom:0">
+        <div class="sec-head-left"><h3>Branch Performance Matrix</h3><p>Klik baris cabang untuk drill-down detail — atau klik "Detail" untuk panel lengkap</p></div>
+        <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
+          <button class="btn-export" onclick="exportBranchCSV()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
           <select id="bp_sort" class="form-input" onchange="sortBranchPerf()" style="width:auto">
             <option value="pipeline">Sort: Pipeline</option>
             <option value="conversion">Sort: Conversion</option>
@@ -1860,33 +2089,115 @@ function renderBranchPerf(){
 
     <!-- AI Recommendations Panel - Branch Performance -->
     <div id="aiRecoPanelBranch" style="margin-top:16px">
-      <div class="card" style="border:1.5px solid #c7d2fe;background:linear-gradient(135deg,#f8f9ff 0%,#eef2ff 100%)">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-          <div style="display:flex;align-items:center;gap:9px">
-            <div style="width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,#294795,#0097D8);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
+      <div class="card ai-reco-card">
+        <div class="ai-reco-header">
+          <div class="ai-reco-title-wrap">
+            <div class="ai-reco-icon-wrap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
             <div>
-              <div style="font-size:13px;font-weight:800;color:#1e3a8a">✨ Rekomendasi AI — Branch Performance</div>
-              <div style="font-size:10.5px;color:#6b7a99">Analisis perbandingan & strategi peningkatan kinerja cabang</div>
+              <div class="ai-reco-title">Rekomendasi AI — Branch Performance</div>
+              <div class="ai-reco-sub">Analisis perbandingan &amp; strategi peningkatan kinerja cabang</div>
             </div>
           </div>
-          <button onclick="loadAIReco('branch')" style="border:1px solid #c7d2fe;background:#fff;color:#294795;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s" onmouseover="this.style.background='#eef2ff'" onmouseout="this.style.background='#fff'">
+          <button class="ai-reco-btn" onclick="loadAIReco('branch')">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.69"/></svg>
-            Analisis AI
+            Refresh
           </button>
         </div>
-        <div id="aiRecoContentBranch">
-          <div style="display:flex;align-items:center;gap:10px;padding:16px;background:rgba(255,255,255,.6);border-radius:7px;border:1px solid #e0e7ff">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-            <span style="font-size:12px;color:#4b5563">Klik <strong>Analisis AI</strong> untuk mendapatkan insight dan rekomendasi strategis perbandingan kinerja antar cabang.</span>
-          </div>
+        <div id="aiRecoContentBranch" class="ai-reco-placeholder">
+          Klik <strong>Refresh</strong> untuk mendapatkan insight dan rekomendasi strategis perbandingan kinerja antar cabang.
         </div>
       </div>
     </div>
   `;
   renderBranchPerfTable(sorted);
   setTimeout(renderBranchPerfCharts,50);
+}
+
+function openBranchDrilldown(branchName){
+  const b=BRANCHES_BASE.find(x=>x.name===branchName);
+  const ps=BRANCH_PROSPECTS[branchName]||[];
+  const emps=EMPLOYEES.filter(e=>e.branch===branchName);
+  const prjs=WON_PROJECTS.filter(p=>p.branch===branchName);
+  const totalVal=ps.reduce((a,p)=>a+p.nilai,0);
+
+  // Per-PIC breakdown
+  const pics=[...new Set(ps.map(p=>p.pic))];
+  const picStats=pics.map(pic=>{
+    const picProspects=ps.filter(p=>p.pic===pic);
+    const picVal=picProspects.reduce((a,p)=>a+p.nilai,0);
+    const contracts=picProspects.filter(p=>p.stage==='contract').length;
+    const emp=emps.find(e=>e.name.includes(pic)||pic.includes(e.name.split(' ')[0]));
+    return {pic,count:picProspects.length,nilai:picVal,contracts,dept:emp?emp.dept:'—',role:emp?emp.role:'KABAG'};
+  }).sort((a,b)=>b.nilai-a.nilai);
+
+  // Sector distribution
+  const sectorMap={};ps.forEach(p=>{sectorMap[p.sector]=(sectorMap[p.sector]||0)+1;});
+  const totalPs=ps.length||1;
+
+  const html=`
+    <div class="g g4" style="margin-bottom:14px">
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;text-align:center">
+        <div style="font-size:10.5px;color:var(--text-muted)">Pipeline</div>
+        <div style="font-size:15px;font-weight:800">Rp ${fmt(b.pipeline)} Jt</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;text-align:center">
+        <div style="font-size:10.5px;color:var(--text-muted)">Prospek Aktif</div>
+        <div style="font-size:15px;font-weight:800">${ps.length}</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;text-align:center">
+        <div style="font-size:10.5px;color:var(--text-muted)">Conversion</div>
+        <div style="font-size:15px;font-weight:800;color:var(--success)">${b.conversion}%</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;text-align:center">
+        <div style="font-size:10.5px;color:var(--text-muted)">Staff</div>
+        <div style="font-size:15px;font-weight:800">${emps.length}</div>
+      </div>
+    </div>
+
+    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px">📋 Breakdown per PIC / Departemen</div>
+    ${picStats.map(pc=>{
+      const pct=pc.nilai?Math.round(pc.nilai/totalVal*100):0;
+      return `<div style="border:1px solid var(--border);border-radius:var(--r-sm);padding:12px;margin-bottom:8px;background:var(--card)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:28px;height:28px;border-radius:6px;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px">${pc.pic.substring(0,2).toUpperCase()}</div>
+            <div>
+              <div style="font-weight:700;font-size:12.5px">${pc.pic}</div>
+              <div style="font-size:10.5px;color:var(--text-muted)">${pc.dept} · ${pc.role}</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:800;font-size:13px">Rp ${fmt(pc.nilai)} Jt</div>
+            <div style="font-size:10.5px;color:var(--text-muted)">${pc.count} prospek · ${pc.contracts} kontrak</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px">
+          <div style="flex:1;height:5px;background:var(--border);border-radius:999px;overflow:hidden">
+            <div style="height:100%;width:${pct}%;background:var(--primary);border-radius:999px;transition:width .4s"></div>
+          </div>
+          <span style="font-size:10px;font-weight:700;color:var(--text-muted)">${pct}%</span>
+        </div>
+      </div>`;
+    }).join('')}
+
+    ${prjs.length?`<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin:14px 0 9px">🔨 Project Berjalan (${prjs.length})</div>
+    ${prjs.map(p=>`<div style="border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;margin-bottom:6px;background:var(--card)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <div style="font-weight:700;font-size:12px">${p.client}</div>
+        <span class="badge badge-${p.health==='Healthy'?'green':p.health==='Watchlist'?'amber':'red'}">${p.health}</span>
+      </div>
+      <div style="font-size:10.5px;color:var(--text-muted)">PIC: ${p.picDelivery} · Progress: ${p.progress}% · Target: ${p.endTarget}</div>
+      <div class="prog" style="margin-top:6px"><span style="width:${p.progress}%;background:${p.health==='Critical'?'var(--danger)':p.health==='Watchlist'?'var(--warning)':'var(--success)'}"></span></div>
+    </div>`).join('')}`:''}
+
+    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin:14px 0 9px">🏷️ Distribusi Sektor</div>
+    ${Object.entries(sectorMap).map(([s,c])=>`<div style="display:flex;align-items:center;gap:9px;margin-bottom:7px">
+      <div style="width:80px;font-size:11.5px;font-weight:600">${s}</div>
+      <div style="flex:1"><div class="prog"><span style="width:${Math.round(c/totalPs*100)}%"></span></div></div>
+      <div style="font-weight:700;font-size:12px;width:24px;text-align:right">${c}</div>
+    </div>`).join('')}
+  `;
+  openPanel('Drill-down: '+branchName,`${emps.length} staff · ${ps.length} prospek · Rp ${fmt(totalVal)} Jt`,html);
 }
 
 function sortBranchPerf(){
@@ -1903,8 +2214,9 @@ function renderBranchPerfTable(branches){
     const rankN=i+1;
     const rankClass=rankN===1?'rank-1':rankN===2?'rank-2':rankN===3?'rank-3':'rank-n';
     const growthColor=b.growth>=10?'var(--success)':b.growth>=5?'var(--warning)':'var(--text-muted)';
-    return `<tr>
-      <td><strong>${b.name}</strong></td>
+    const branchEmps=EMPLOYEES.filter(e=>e.branch===b.name);
+    return `<tr style="cursor:pointer" onclick="openBranchDrilldown('${b.name}')" title="Klik untuk drill-down detail cabang ${b.name}">
+      <td><div style="display:flex;align-items:center;gap:7px"><strong>${b.name}</strong><span style="font-size:10px;color:var(--text-muted)">${branchEmps.length} staff</span></div></td>
       <td>
         <div>${fmt(b.pipeline)}</div>
         <div class="perf-bar"><div class="perf-bar-inner" style="width:${b.pipeline/maxPipeline*100}%;background:var(--primary)"></div></div>
@@ -1916,8 +2228,13 @@ function renderBranchPerfTable(branches){
         <div class="perf-bar"><div class="perf-bar-inner" style="width:${b.conversion/maxConv*100}%;background:var(--success)"></div></div>
       </td>
       <td><span style="font-weight:700;color:${growthColor}">▲ ${b.growth}%</span></td>
-      <td><span class="rank-badge ${rankClass}">#${rankN}</span></td>
-      <td><button class="act-btn" onclick="openBranchPanel('${b.name}')">Detail</button></td>
+      <td>
+        <div style="display:flex;align-items:center;gap:5px">
+          ${rankN===1?`<span style="width:5px;height:5px;border-radius:50%;background:var(--primary);flex-shrink:0;display:inline-block"></span>`:'<span style="width:5px;flex-shrink:0;display:inline-block"></span>'}
+          <span class="rank-badge ${rankClass}">${rankN}</span>
+        </div>
+      </td>
+      <td><div style="display:flex;gap:4px"><button class="act-btn" onclick="event.stopPropagation();openBranchPanel('${b.name}')">Detail</button><button class="act-btn" onclick="event.stopPropagation();openBranchDrilldown('${b.name}')" style="background:var(--primary-light);color:var(--primary)">Drill-down</button></div></td>
     </tr>`;
   }).join('');
 }
@@ -2101,7 +2418,12 @@ function renderPipeline(){
         </div>
       </div>
       <div class="card">
-        <div class="sec-head"><div class="sec-head-left"><h3>Detail Pipeline</h3><p>Seluruh data prospek aktif</p></div></div>
+        <div class="sec-head"><div class="sec-head-left"><h3>Detail Pipeline</h3><p>Seluruh data prospek aktif</p></div>
+          <button class="btn-export" onclick="exportPipelineCSV()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
+        </div>
         <div class="filter-row">
           <select id="df_branch" class="form-input" onchange="filterDetailTable(true)" style="width:auto">
             <option value="all">Semua Cabang</option>
@@ -2119,6 +2441,18 @@ function renderPipeline(){
             <option value="all">Semua Layanan</option>
             ${['Verifikasi & Survei','Kajian & Konsultansi','Monitoring Program','Investasi & TI'].map(s=>`<option value="${s}">${s}</option>`).join('')}
           </select>
+          <select id="df_nilai" class="form-input" onchange="filterDetailTable(true)" style="width:auto">
+            <option value="all">Semua Nilai</option>
+            <option value="lt500">< Rp 500 Jt</option>
+            <option value="500to1000">Rp 500–1000 Jt</option>
+            <option value="gt1000">> Rp 1 Miliar</option>
+          </select>
+          <select id="df_eta" class="form-input" onchange="filterDetailTable(true)" style="width:auto">
+            <option value="all">Semua ETA</option>
+            <option value="thismonth">Bulan Ini</option>
+            <option value="nextmonth">Bulan Depan</option>
+            <option value="thisquarter">Kuartal Ini</option>
+          </select>
           <input id="df_q" class="form-input" placeholder="Cari klien / PIC..." oninput="filterDetailTable(true)" style="width:180px"/>
         </div>
         <div id="detailPipelineTable"></div>
@@ -2126,27 +2460,22 @@ function renderPipeline(){
 
       <!-- AI Recommendations for Pipeline -->
       <div style="margin-top:16px" id="aiRecoPipelineWrap">
-        <div class="card" style="border:1.5px solid #c7d2fe;background:linear-gradient(135deg,#f8f9ff 0%,#eef2ff 100%)">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:9px">
-              <div style="width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,#294795,#0097D8);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="19" cy="5" r="3" fill="#fff" stroke="none"/></svg>
-              </div>
+        <div class="card ai-reco-card">
+          <div class="ai-reco-header">
+            <div class="ai-reco-title-wrap">
+              <div class="ai-reco-icon-wrap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
               <div>
-                <div style="font-size:13px;font-weight:800;color:#1e3a8a">✨ Rekomendasi AI — Pipeline</div>
-                <div style="font-size:10.5px;color:#6b7a99">Analisis peluang, risiko, dan prioritas aksi pipeline</div>
+                <div class="ai-reco-title">Rekomendasi AI — Pipeline</div>
+                <div class="ai-reco-sub">Analisis peluang, risiko, dan prioritas aksi pipeline</div>
               </div>
             </div>
-            <button onclick="loadAIReco('pipeline')" style="border:1px solid #c7d2fe;background:#fff;color:#294795;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s" onmouseover="this.style.background='#eef2ff'" onmouseout="this.style.background='#fff'">
+            <button class="ai-reco-btn" onclick="loadAIReco('pipeline')">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.69"/></svg>
               Refresh
             </button>
           </div>
-          <div id="aiRecoContentPipeline">
-            <div style="display:flex;align-items:center;gap:10px;padding:16px;background:rgba(255,255,255,.6);border-radius:7px;border:1px solid #e0e7ff">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-              <span style="font-size:12px;color:#4b5563">Klik <strong>Refresh</strong> untuk memuat rekomendasi AI berbasis data pipeline terkini.</span>
-            </div>
+          <div id="aiRecoContentPipeline" class="ai-reco-placeholder">
+            Klik <strong>Refresh</strong> untuk memuat rekomendasi AI berbasis data pipeline terkini.
           </div>
         </div>
       </div>
@@ -2450,11 +2779,30 @@ function filterDetailTable(resetPage){
   const sSel=($('df_stage')||{}).value||'all';
   const scSel=($('df_sector')||{}).value||'all';
   const svcSel=($('df_service')||{}).value||'all';
+  const nilaiSel=($('df_nilai')||{}).value||'all';
+  const etaSel=($('df_eta')||{}).value||'all';
   const q=(($('df_q')||{}).value||'').toLowerCase();
+  const now=new Date();
+  const curMonth=now.getMonth();const curYear=now.getFullYear();
+  const monthNames=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const curMonthStr=monthNames[curMonth];
+  const nextMonthStr=monthNames[(curMonth+1)%12];
   const allP=getAllProspects();
-  const filtered=allP.filter(p=>(bSel==='all'||p.branch===bSel)&&(sSel==='all'||p.stage===sSel)&&(scSel==='all'||p.sector===scSel)&&(svcSel==='all'||p.layanan===svcSel)&&(!q||[p.judul,p.klien,p.pic].join(' ').toLowerCase().includes(q)));
+  const filtered=allP.filter(p=>{
+    if(bSel!=='all'&&p.branch!==bSel)return false;
+    if(sSel!=='all'&&p.stage!==sSel)return false;
+    if(scSel!=='all'&&p.sector!==scSel)return false;
+    if(svcSel!=='all'&&p.layanan!==svcSel)return false;
+    if(nilaiSel==='lt500'&&p.nilai>=500)return false;
+    if(nilaiSel==='500to1000'&&(p.nilai<500||p.nilai>1000))return false;
+    if(nilaiSel==='gt1000'&&p.nilai<=1000)return false;
+    if(etaSel==='thismonth'&&!(p.eta&&p.eta.includes(curMonthStr)))return false;
+    if(etaSel==='nextmonth'&&!(p.eta&&p.eta.includes(nextMonthStr)))return false;
+    if(q&&![p.judul,p.klien,p.pic].join(' ').toLowerCase().includes(q))return false;
+    return true;
+  });
   const el=$('detailPipelineTable');if(!el)return;
-  if(!filtered.length){el.innerHTML='<div class="empty-state">Tidak ada data sesuai filter.</div>';return;}
+  if(!filtered.length){el.innerHTML='<div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="empty-title">Tidak ada data sesuai filter</div><div class="empty-sub">Coba ubah atau reset filter pencarian.</div></div>';return;}
   const totalPages=Math.ceil(filtered.length/PIPELINE_PAGE_SIZE);
   if(pipelinePage>totalPages)pipelinePage=totalPages;
   const start=(pipelinePage-1)*PIPELINE_PAGE_SIZE;
@@ -2465,14 +2813,15 @@ function filterDetailTable(resetPage){
   pgHtml+=`<button class="pg-btn" onclick="goPipelinePage(${pipelinePage+1})" ${pipelinePage===totalPages?'disabled':''}>›</button>`;
   pgHtml+=`<span style="font-size:11px;color:var(--text-muted);margin-left:6px">Menampilkan ${start+1}–${Math.min(start+PIPELINE_PAGE_SIZE,filtered.length)} dari ${filtered.length} prospek</span></div>`;
   el.innerHTML=`<div class="tbl-wrap"><table>
-    <thead><tr><th>ID</th><th>Pekerjaan / Klien</th><th>Cabang</th><th>Sektor</th><th>Layanan</th><th>Nilai (Jt)</th><th>Tahapan</th><th>PIC</th></tr></thead>
+    <thead><tr><th>ID</th><th>Pekerjaan / Klien</th><th>Cabang</th><th>Sektor</th><th>Layanan</th><th>Nilai (Jt)</th><th>Tahapan</th><th>PIC</th><th>ETA</th></tr></thead>
     <tbody>${paged.map(p=>`<tr>
       <td style="font-size:10.5px;color:var(--text-muted)">${p.id}</td>
       <td><div style="font-weight:700">${p.judul}</div><div style="font-size:10.5px;color:var(--text-muted)">${p.klien}</div></td>
       <td>${p.branch}</td><td>${p.sector}</td><td style="font-size:11.5px">${p.layanan}</td>
       <td style="font-weight:800">${fmt(p.nilai)}</td>
-      <td><span class="badge badge-${stageBadge(p.stage)}">${stageName(p.stage)}</span></td>
+      <td><div style="display:flex;flex-direction:column;gap:3px"><span class="badge badge-${stageBadge(p.stage)}">${stageName(p.stage)}</span><div class="stage-funnel">${['lead','qualified','proposal','negotiation','contract'].map(s=>`<div class="stage-funnel-step ${p.stage===s?'active':(['lead','qualified','proposal','negotiation','contract'].indexOf(p.stage)>['lead','qualified','proposal','negotiation','contract'].indexOf(s)?'done':'')}" title="${stageName(s)}"></div>`).join('')}</div></div></td>
       <td>${p.pic}</td>
+      <td style="font-size:11.5px;color:var(--text-muted)">${p.eta||'-'}</td>
     </tr>`).join('')}</tbody>
   </table></div>${pgHtml}`;
 }
@@ -2530,27 +2879,22 @@ function renderProject(){
 
     <!-- AI Recommendations for Project Monitoring -->
     <div style="margin-top:16px">
-      <div class="card" style="border:1.5px solid #c7d2fe;background:linear-gradient(135deg,#f8f9ff 0%,#eef2ff 100%)">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <div style="display:flex;align-items:center;gap:9px">
-            <div style="width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,#294795,#0097D8);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="19" cy="5" r="3" fill="#fff" stroke="none"/></svg>
-            </div>
+      <div class="card ai-reco-card">
+        <div class="ai-reco-header">
+          <div class="ai-reco-title-wrap">
+            <div class="ai-reco-icon-wrap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
             <div>
-              <div style="font-size:13px;font-weight:800;color:#1e3a8a">✨ Rekomendasi AI — Project Monitoring</div>
-              <div style="font-size:10.5px;color:#6b7a99">Analisis health, risiko keterlambatan, dan langkah mitigasi</div>
+              <div class="ai-reco-title">Rekomendasi AI — Project Monitoring</div>
+              <div class="ai-reco-sub">Analisis health, risiko keterlambatan, dan langkah mitigasi</div>
             </div>
           </div>
-          <button onclick="loadAIReco('project')" style="border:1px solid #c7d2fe;background:#fff;color:#294795;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s" onmouseover="this.style.background='#eef2ff'" onmouseout="this.style.background='#fff'">
+          <button class="ai-reco-btn" onclick="loadAIReco('project')">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.69"/></svg>
             Refresh
           </button>
         </div>
-        <div id="aiRecoContentProject">
-          <div style="display:flex;align-items:center;gap:10px;padding:16px;background:rgba(255,255,255,.6);border-radius:7px;border:1px solid #e0e7ff">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-            <span style="font-size:12px;color:#4b5563">Klik <strong>Refresh</strong> untuk memuat rekomendasi AI berbasis data project monitoring terkini.</span>
-          </div>
+        <div id="aiRecoContentProject" class="ai-reco-placeholder">
+          Klik <strong>Refresh</strong> untuk memuat rekomendasi AI berbasis data project monitoring terkini.
         </div>
       </div>
     </div>
@@ -3577,83 +3921,71 @@ function generateSmartRecos(context){
 }
 function renderRecoCards(el, recos){
   if(!recos||!recos.length){
-    el.innerHTML=`<div style="padding:14px;background:#FEF2F2;border:1px solid #FECACA;border-radius:7px;font-size:12px;color:#991b1b">Tidak ada rekomendasi tersedia.</div>`;
+    el.innerHTML=`<div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 6v4m0 4h.01"/></svg></div><div class="empty-title">Tidak ada rekomendasi</div><div class="empty-sub">Data tidak cukup untuk menghasilkan rekomendasi.</div></div>`;
     return;
   }
-  const priorityConfig={
-    high:{bg:'#FEE2E2',border:'#FCA5A5',dot:'#DC2626',label:'Prioritas Tinggi',labelBg:'#FEE2E2',labelColor:'#991b1b'},
-    medium:{bg:'#FEF3C7',border:'#FDE68A',dot:'#D97706',label:'Prioritas Sedang',labelBg:'#FEF3C7',labelColor:'#92400e'},
-    low:{bg:'#F0FDF4',border:'#BBF7D0',dot:'#16A34A',label:'Prioritas Rendah',labelBg:'#DCFCE7',labelColor:'#15803d'}
-  };
-  const catIcons={Pipeline:'📊',Project:'🔨',Cabang:'📍',Approval:'✅',Strategi:'🎯'};
+  const priorityLabel={high:'Prioritas Tinggi',medium:'Prioritas Sedang',low:'Prioritas Rendah'};
   const isLocal=location.protocol==='file:';
   const cardId='reco_'+Date.now();
 
   el.innerHTML=`
-    ${isLocal?`<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:6px;margin-bottom:10px;font-size:11px;color:#92400e">
-      <span>⚠️</span><span>Mode analisis lokal — buka file dari web server untuk menggunakan Claude AI secara langsung.</span>
-    </div>`:''}
-    <div style="display:grid;gap:10px">
+    ${isLocal?`<div style="padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;font-size:11px;color:var(--text-muted)">Mode analisis lokal — buka file dari web server untuk menggunakan Claude AI secara langsung.</div>`:''}
+    <div style="display:grid;gap:8px">
       ${recos.map((r,i)=>{
-        const pc=priorityConfig[r.priority]||priorityConfig.medium;
         const actions=Array.isArray(r.actions)&&r.actions.length?r.actions:[];
         const uid=cardId+'_'+i;
         const isFirst=(i===0);
-        return `<div style="background:var(--reco-card-bg);border:1px solid ${pc.border};border-radius:10px;border-left:4px solid ${pc.dot};overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04);transition:background .2s,color .2s">
+        const savedChecks=(_recoCheckState[uid])||{};
+        return `<div style="background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:opacity .3s,transform .3s" data-reco-uid="${uid}">
 
-          <!-- Accordion Header (clickable) -->
-          <div onclick="toggleRecoAccordion('${uid}')" style="display:flex;gap:12px;align-items:center;padding:13px 14px;cursor:pointer;user-select:none;transition:background .15s" onmouseover="this.style.background='var(--reco-hover-bg)'" onmouseout="this.style.background='transparent'">
-            <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:${pc.bg};border:2px solid ${pc.dot};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:${pc.dot}">${i+1}</div>
+          <!-- Accordion Header -->
+          <div onclick="toggleRecoAccordion('${uid}')" style="display:flex;gap:12px;align-items:center;padding:12px 14px;cursor:pointer;user-select:none;transition:background .15s" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='transparent'">
+            <div style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-muted)">${i+1}</div>
             <div style="flex:1;min-width:0">
-              <div style="font-size:13px;font-weight:800;color:var(--reco-title-color);line-height:1.3;margin-bottom:4px">${catIcons[r.category]||'💡'} ${r.title}</div>
-              <div style="display:flex;gap:5px;flex-wrap:wrap">
-                <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;background:${pc.labelBg};color:${pc.labelColor};border:1px solid ${pc.border}">${pc.label}</span>
-                <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--reco-cat-bg);color:var(--reco-cat-color);border:1px solid var(--reco-cat-border)">${r.category}</span>
-                ${r.deadline?`<span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:#FFF7ED;color:#c2410c;border:1px solid #fed7aa">⏱ ${r.deadline}</span>`:''}
+              <div style="font-size:13px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:3px">${r.title}</div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                <span style="font-size:10.5px;color:var(--text-muted)">${r.category}</span>
+                ${r.deadline?`<span style="font-size:10.5px;color:var(--text-muted)">· ${r.deadline}</span>`:''}
+                <span style="font-size:10px;color:var(--text-muted)">· ${priorityLabel[r.priority]||'Prioritas Sedang'}</span>
               </div>
             </div>
-            <!-- Chevron icon -->
-            <div id="chevron_${uid}" style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--reco-chevron-bg);display:flex;align-items:center;justify-content:center;transition:transform .25s;transform:${isFirst?'rotate(180deg)':'rotate(0deg)'}">
-              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="var(--reco-cat-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg>
+            <button class="reco-dismiss-btn" onclick="event.stopPropagation();dismissRecoCard('${uid}',this)" title="Arsipkan">
+              Selesai
+            </button>
+            <div id="chevron_${uid}" style="flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:transform .25s;transform:${isFirst?'rotate(180deg)':'rotate(0deg)'}">
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="var(--text-muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg>
             </div>
           </div>
 
           <!-- Accordion Body -->
-          <div id="body_${uid}" style="display:${isFirst?'block':'none'};border-top:1px solid ${pc.border}">
-
-            <!-- Owner row -->
-            ${r.owner?`<div style="padding:8px 14px 0 54px;display:flex;gap:5px;flex-wrap:wrap">
-              <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--reco-owner-bg);color:var(--reco-owner-color);border:1px solid var(--reco-owner-border)">👤 ${r.owner}</span>
-            </div>`:''}
-
-            <!-- Context / detail -->
-            <div style="padding:10px 14px 10px 54px">
-              <div style="font-size:12px;color:var(--reco-detail-color);line-height:1.6">${r.detail}</div>
+          <div id="body_${uid}" style="display:${isFirst?'block':'none'};border-top:1px solid var(--border)">
+            ${r.owner?`<div style="padding:10px 14px 0 50px;font-size:11px;color:var(--text-muted)">Penanggung jawab: <strong style="color:var(--text)">${r.owner}</strong></div>`:''}
+            <div style="padding:10px 14px 10px 50px">
+              <div style="font-size:12px;color:var(--text-muted);line-height:1.7">${r.detail}</div>
             </div>
-
-            <!-- Action steps -->
-            ${actions.length?`<div style="margin:0 14px 12px 54px;background:var(--reco-action-bg);border:1px solid var(--reco-action-border);border-radius:7px;padding:10px 12px">
-              <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--reco-action-label);margin-bottom:8px">📋 Langkah Aksi</div>
+            ${actions.length?`<div class="action-list-wrap" style="margin:0 14px 12px 50px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 12px">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:8px">Langkah Aksi</div>
               <div style="display:grid;gap:6px">
-                ${actions.map((a,ai)=>`<label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;user-select:none" onclick="toggleActionCheck(this)">
-                  <div style="width:16px;height:16px;border-radius:4px;border:1.5px solid var(--reco-checkbox-border);background:var(--reco-checkbox-bg);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:.15s" class="action-checkbox">
-                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="var(--reco-action-label)" stroke-width="2.5" style="display:none" class="check-icon"><polyline points="2 6 5 9 10 3"/></svg>
+                ${actions.map((a,ai)=>{const isChecked=savedChecks[ai]===true;return `<label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;user-select:none" onclick="toggleActionCheck(this,'${uid}',${ai})">
+                  <div style="width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border);background:${isChecked?'var(--primary)':'var(--card)'};flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.15s" class="action-checkbox">
+                    <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" style="display:${isChecked?'block':'none'}" class="check-icon"><polyline points="2 6 5 9 10 3"/></svg>
                   </div>
-                  <span style="font-size:12px;color:var(--reco-action-text);line-height:1.5" class="action-text">${a}</span>
-                </label>`).join('')}
+                  <span style="font-size:12px;color:${isChecked?'var(--text-muted)':'var(--text)'};text-decoration:${isChecked?'line-through':'none'};line-height:1.5" class="action-text">${a}</span>
+                </label>`}).join('')}
+              </div>
+              <div class="all-done-msg" style="display:none;align-items:center;gap:7px;margin-top:10px;padding:7px 10px;background:var(--bg);border-radius:5px;border:1px solid var(--border)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span style="font-size:11.5px;font-weight:600;color:var(--text-muted)">Semua langkah selesai. Klik Selesai untuk arsipkan.</span>
               </div>
             </div>`:''}
-
-            <!-- Impact footer -->
-            <div style="padding:8px 14px 12px 54px;display:flex;gap:6px;align-items:flex-start">
-              <span style="font-size:13px;flex-shrink:0;margin-top:1px">💡</span>
-              <span style="font-size:11.5px;color:var(--reco-impact-color);font-style:italic;line-height:1.5">${r.impact}</span>
+            <div style="padding:6px 14px 12px 50px">
+              <span style="font-size:11.5px;color:var(--text-muted);line-height:1.6">${r.impact}</span>
             </div>
           </div>
         </div>`;
       }).join('')}
     </div>
-    <div style="margin-top:12px;text-align:right;font-size:10.5px;color:var(--reco-timestamp-color)">${isLocal?'Analisis berbasis data lokal':'Dihasilkan oleh Claude AI'} · ${new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}</div>`;
+    <div style="margin-top:10px;text-align:right;font-size:10.5px;color:var(--text-muted)">${isLocal?'Analisis berbasis data lokal':'Dihasilkan oleh Claude AI'} · ${new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}</div>`;
 }
 
 function toggleRecoAccordion(uid){
@@ -3665,26 +3997,6 @@ function toggleRecoAccordion(uid){
   chevron.style.transform=isOpen?'rotate(0deg)':'rotate(180deg)';
 }
 
-function toggleActionCheck(label){
-  const box=label.querySelector('.action-checkbox');
-  const icon=label.querySelector('.check-icon');
-  const txt=label.querySelector('.action-text');
-  const checked=icon.style.display!=='none';
-  const s=getComputedStyle(document.documentElement);
-  if(checked){
-    icon.style.display='none';
-    box.style.background=s.getPropertyValue('--reco-checkbox-bg').trim();
-    box.style.borderColor=s.getPropertyValue('--reco-checkbox-border').trim();
-    txt.style.textDecoration='none';
-    txt.style.color=s.getPropertyValue('--reco-action-text').trim();
-  }else{
-    icon.style.display='block';
-    box.style.background=s.getPropertyValue('--reco-chevron-bg').trim();
-    box.style.borderColor=s.getPropertyValue('--reco-action-label').trim();
-    txt.style.textDecoration='line-through';
-    txt.style.color=s.getPropertyValue('--reco-action-text-done').trim();
-  }
-}
 /* ===================== PROFILE ===================== */
 function openMyProfile(){
   const e=EMPLOYEES.find(x=>x.id===auth.empId)||EMPLOYEES[0];
@@ -3706,8 +4018,158 @@ function toggleMobileSidebar(){
   document.body.style.overflow=sb.classList.contains('mobile-open')?'hidden':'';
 }
 
+/* ===================== MOBILE SEARCH ===================== */
+function toggleMobileSearch(){
+  const overlay=document.getElementById('mobileSearchOverlay');
+  overlay.style.display='flex';
+  setTimeout(()=>document.getElementById('mobileSearchInput').focus(),50);
+}
+function closeMobileSearch(){
+  const overlay=document.getElementById('mobileSearchOverlay');
+  overlay.style.display='none';
+  const drop=document.getElementById('mobileSearchDropdown');
+  if(drop)drop.classList.remove('show');
+}
+
+/* ===================== GLOBAL SEARCH ===================== */
+function handleGlobalSearch(q){
+  const drop=document.getElementById('searchDropdown');
+  const mobileDrop=document.getElementById('mobileSearchDropdown');
+  const target=drop||mobileDrop;
+  if(!target)return;
+  if(!q||q.trim().length<2){target.classList.remove('show');if(drop)drop.classList.remove('show');if(mobileDrop)mobileDrop.classList.remove('show');return;}
+  const term=q.toLowerCase();
+  // Search prospects
+  const allP=getAllProspects();
+  const matchP=allP.filter(p=>[p.judul,p.klien,p.pic,p.branch].join(' ').toLowerCase().includes(term)).slice(0,5);
+  // Search employees
+  const matchE=EMPLOYEES.filter(e=>[e.name,e.role,e.branch,e.dept].join(' ').toLowerCase().includes(term)).slice(0,3);
+  // Search projects
+  const matchPrj=WON_PROJECTS.filter(p=>[p.client,p.branch,p.picDelivery,p.service].join(' ').toLowerCase().includes(term)).slice(0,3);
+
+  let html='';
+  if(matchP.length){
+    html+=`<div class="search-result-group">Pipeline Prospek</div>`;
+    html+=matchP.map(p=>`<div class="search-result-item" onclick="navTo('pagePipeline');closeSearchDropdown();setTimeout(()=>{document.getElementById('df_q').value='${p.klien.replace(/'/g,"\\'")}';filterDetailTable(true);},200)">
+      <div class="search-result-icon" style="background:#EEF2FF">📊</div>
+      <div>
+        <div class="search-result-title">${p.judul.substring(0,40)}</div>
+        <div class="search-result-sub">${p.klien} · ${p.branch} · <span class="badge badge-${stageBadge(p.stage)}" style="font-size:9px;padding:1px 5px">${stageName(p.stage)}</span></div>
+      </div>
+    </div>`).join('');
+  }
+  if(matchE.length){
+    html+=`<div class="search-result-group">Karyawan</div>`;
+    html+=matchE.map(e=>`<div class="search-result-item" onclick="openEmployeeDetail('${e.id}');closeSearchDropdown()">
+      <div class="search-result-icon" style="background:${e.color}22;color:${e.color};font-size:14px;font-weight:800">${e.initials}</div>
+      <div>
+        <div class="search-result-title">${e.name}</div>
+        <div class="search-result-sub">${e.role} · ${e.branch} · ${e.dept}</div>
+      </div>
+    </div>`).join('');
+  }
+  if(matchPrj.length){
+    html+=`<div class="search-result-group">Project Delivery</div>`;
+    html+=matchPrj.map(p=>`<div class="search-result-item" onclick="navTo('pageProject');closeSearchDropdown()">
+      <div class="search-result-icon" style="background:#DCFCE7">🔨</div>
+      <div>
+        <div class="search-result-title">${p.client}</div>
+        <div class="search-result-sub">${p.branch} · ${p.progress}% · Health: ${p.health}</div>
+      </div>
+    </div>`).join('');
+  }
+  if(!html) html=`<div class="search-no-result">Tidak ada hasil untuk "<strong>${q}</strong>"</div>`;
+
+  if(drop){drop.innerHTML=html;drop.classList.add('show');}
+  if(mobileDrop){mobileDrop.innerHTML=html;mobileDrop.classList.add('show');}
+}
+function closeSearchDropdown(){
+  const d=document.getElementById('searchDropdown');
+  const md=document.getElementById('mobileSearchDropdown');
+  if(d)d.classList.remove('show');
+  if(md)md.classList.remove('show');
+}
+
+/* ===================== EXPORT CSV ===================== */
+function exportToCSV(data, filename, headers){
+  const rows=[headers,...data.map(r=>headers.map(h=>r[h]||''))];
+  const csv=rows.map(r=>r.map(v=>'"'+(String(v||'').replace(/"/g,'""'))+'"').join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=filename;a.click();URL.revokeObjectURL(a.href);
+  toast('📥 Export berhasil!','success');
+}
+function exportPipelineCSV(){
+  const allP=getAllProspects();
+  exportToCSV(allP,'pipeline_lsi.csv',['id','judul','klien','wilayah','sector','layanan','stage','nilai','pic','eta','branch']);
+}
+function exportProjectCSV(){
+  exportToCSV(WON_PROJECTS,'project_lsi.csv',['id','client','branch','service','progress','status','health','picDelivery','startDate','endTarget','blocker']);
+}
+function exportBranchCSV(){
+  exportToCSV(BRANCHES_BASE,'performa_cabang.csv',['name','pipeline','prospects','conversion','projects','growth','rank','sector']);
+}
+
+/* ===================== RECO DISMISS/ARCHIVE ===================== */
+let _dismissedRecos=JSON.parse(localStorage.getItem('dismissedRecos')||'[]');
+let _recoCheckState=JSON.parse(localStorage.getItem('recoCheckState')||'{}');
+
+function dismissRecoCard(uid,el){
+  _dismissedRecos.push(uid);
+  try{localStorage.setItem('dismissedRecos',JSON.stringify(_dismissedRecos));}catch(e){}
+  const card=el.closest('[data-reco-uid]');
+  if(card){card.style.transition='opacity .3s,transform .3s';card.style.opacity='0';card.style.transform='translateX(20px)';setTimeout(()=>card.remove(),320);}
+  toast('✅ Rekomendasi diarsipkan','info');
+}
+function saveRecoCheckState(uid,actionIdx,checked){
+  if(!_recoCheckState[uid])_recoCheckState[uid]={};
+  _recoCheckState[uid][actionIdx]=checked;
+  try{localStorage.setItem('recoCheckState',JSON.stringify(_recoCheckState));}catch(e){}
+}
+function toggleActionCheck(label,uid,actionIdx){
+  const box=label.querySelector('.action-checkbox');
+  const icon=label.querySelector('.check-icon');
+  const txt=label.querySelector('.action-text');
+  const checked=icon.style.display!=='none';
+  const s=getComputedStyle(document.documentElement);
+  if(checked){
+    icon.style.display='none';
+    box.style.background=s.getPropertyValue('--reco-checkbox-bg').trim();
+    box.style.borderColor=s.getPropertyValue('--reco-checkbox-border').trim();
+    txt.style.textDecoration='none';
+    txt.style.color=s.getPropertyValue('--reco-action-text').trim();
+    saveRecoCheckState(uid,actionIdx,false);
+  }else{
+    icon.style.display='block';
+    box.style.background=s.getPropertyValue('--reco-chevron-bg').trim();
+    box.style.borderColor=s.getPropertyValue('--reco-action-label').trim();
+    txt.style.textDecoration='line-through';
+    txt.style.color=s.getPropertyValue('--reco-action-text-done').trim();
+    saveRecoCheckState(uid,actionIdx,true);
+    // Check if all actions done
+    const allCheckboxes=label.closest('.action-list-wrap').querySelectorAll('.check-icon');
+    const allChecked=[...allCheckboxes].every(i=>i.style.display!=='none');
+    if(allChecked){setTimeout(()=>{const wrap=label.closest('.action-list-wrap');if(wrap){const done=wrap.querySelector('.all-done-msg');if(done){done.style.display='flex';}}},100);}
+  }
+}
+
 /* ===================== SAFE DOM INIT ===================== */
 document.addEventListener('DOMContentLoaded',function(){
+  // === RESTORE SESSION ===
+  try{
+    const saved=sessionStorage.getItem('lsi_auth');
+    if(saved){
+      const restored=JSON.parse(saved);
+      if(restored&&restored.loggedIn){
+        auth=restored;
+        document.getElementById('loginScreen').style.display='none';
+        document.getElementById('app').style.display='flex';
+        initApp();
+        showFloatChat();
+      }
+    }
+  }catch(e){}
+
   // Attach modal/overlay click-outside handlers safely
   var ov=document.getElementById('overlay');
   var mo=document.getElementById('modalOverlay');
