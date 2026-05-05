@@ -232,13 +232,13 @@ html,body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
 
-.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative;overflow:hidden}
+.kpi-card{background:var(--card);border-radius:var(--r);padding:16px;position:relative;overflow:hidden}
 .kpi-icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
 .kpi-icon svg{width:18px;height:18px}
 .kpi-label{font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
 .kpi-value{font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
 .kpi-sub{font-size:10.5px;color:var(--text-muted);margin-top:4px}
-.kpi-stripe{position:absolute;right:0;top:0;bottom:0;width:4px}
+.kpi-stripe{display:none}
 .kpi-sparkline{margin-top:10px;height:44px;position:relative}
 .kpi-sparkline canvas{display:block;width:100%!important;height:44px!important}
 
@@ -402,9 +402,8 @@ tr:hover td{background:var(--bg);transition:.1s}
 .form-section-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);padding:10px 0 7px;border-bottom:1px solid var(--border);margin-bottom:11px}
 
 /* ===== LOGIN ===== */
-.login-screen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:999}
-.login-screen::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-.login-box{background:#fff;border-radius:10px;padding:32px;width:390px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;z-index:1}
+.login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999}
+.login-box{background:#fff;border-radius:10px;padding:32px;width:390px;box-shadow:0 2px 24px rgba(41,71,149,.08);border:1px solid var(--border);position:relative;z-index:1}
 .login-logo{display:flex;align-items:center;gap:9px;margin-bottom:22px}
 .login-logo-icon{width:36px;height:36px;background:var(--navy);border-radius:7px;display:flex;align-items:center;justify-content:center}
 .login-logo-icon svg{width:20px;height:20px;fill:#fff}
@@ -550,7 +549,10 @@ tr:hover td{background:var(--bg);transition:.1s}
 .btn-export{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 12px;cursor:pointer;font:inherit;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:5px;transition:.15s}
 .btn-export:hover{background:var(--bg);border-color:var(--primary);color:var(--primary)}
 
-/* ===== AI RECO PANEL ===== */
+.sb-urgent-dot{position:absolute;top:-2px;right:-3px;width:7px;height:7px;border-radius:50%;background:var(--danger);border:1.5px solid var(--sidebar);animation:sb-blink 1.8s ease-in-out infinite}
+@keyframes sb-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.dark .sb-urgent-dot{border-color:var(--sidebar)}
+
 .ai-reco-card{padding:16px}
 .ai-reco-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .ai-reco-title-wrap{display:flex;align-items:center;gap:10px}
@@ -1659,11 +1661,12 @@ function initSidebar(){
 
   const pendingCount=APPROVAL_QUEUE.filter(x=>x.status==='pending').length;
   const chatUnread=CHAT_ROOMS.reduce((acc,r)=>acc+r.unread,0);
+  const urgentProjects=WON_PROJECTS.filter(p=>p.health==='Critical'||p.health==='Watchlist'||p.status==='Delayed').length;
 
   const navItems = auth.role==='kabag' ? [
     {id:'pageOverview',label:'Overview',icon:'grid'},
     {id:'pagePipeline',label:'Pipeline & Monitoring',icon:'bar-chart'},
-    {id:'pageProject',label:'Project Monitoring',icon:'check-circle'},
+    {id:'pageProject',label:'Project Monitoring',icon:'check-circle',urgent:urgentProjects},
     {id:'pageSwasta',label:'Penawaran Swasta',icon:'briefcase'},
     {id:'pageBranchPerf',label:'Branch Performance',icon:'map-pin'},
     {id:'pageEmployee',label:'Karyawan',icon:'users'},
@@ -1672,7 +1675,7 @@ function initSidebar(){
   ] : [
     {id:'pageOverview',label:'Overview',icon:'grid'},
     {id:'pagePipeline',label:'Pipeline & Monitoring',icon:'bar-chart'},
-    {id:'pageProject',label:'Project Monitoring',icon:'check-circle'},
+    {id:'pageProject',label:'Project Monitoring',icon:'check-circle',urgent:urgentProjects},
     {id:'pageSwasta',label:'Penawaran Swasta',icon:'briefcase'},
     {id:'pageBranchPerf',label:'Branch Performance',icon:'map-pin'},
     {id:'pageEmployee',label:'Karyawan',icon:'users'},
@@ -1682,10 +1685,14 @@ function initSidebar(){
 
   $('sbNav').innerHTML = navItems.map(item=>`
     <div class="sb-item ${item.id===currentPage?'active':''}" onclick="navTo('${item.id}')" title="${item.label}">
-      ${NAV_ICONS[item.icon]||''}
+      <div style="position:relative;display:flex;flex-shrink:0">
+        ${NAV_ICONS[item.icon]||''}
+        ${(item.urgent||0)>0?`<span class="sb-urgent-dot"></span>`:''}
+      </div>
       <span>${item.label}</span>
+      ${(item.urgent||0)>0?`<span class="sb-count">${item.urgent}</span>`:''}
       ${(item.count||0)>0?`<span class="sb-count">${item.count}</span>`:''}
-      <div class="sb-item-tooltip">${item.label}</div>
+      <div class="sb-item-tooltip">${item.label}${(item.urgent||0)>0?` · ${item.urgent} perlu perhatian`:''}</div>
     </div>`).join('');
 
   buildNotifList();
@@ -1736,10 +1743,10 @@ function renderOverview(){
       <div class="zone-label">📊 At a Glance — KPI Utama</div>
     <div class="g g4" style="margin-bottom:16px">
       <div class="kpi-card">
-        <div class="kpi-stripe" style="background:var(--navy)"></div>
+        <div class="kpi-stripe" style="background:var(--primary)"></div>
         <div style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
-            <div class="kpi-icon" style="background:#EEF2FF;margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="#294795" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="kpi-icon" style="background:var(--primary-light);margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
             <div class="kpi-label">Total Pipeline</div>
             <div class="kpi-value" style="font-size:19px">Rp ${fmt(totalPipe)} Jt</div>
             <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--success);font-weight:700">↑ 12%</span> vs bulan lalu</div>
@@ -1751,7 +1758,7 @@ function renderOverview(){
         <div class="kpi-stripe" style="background:var(--success)"></div>
         <div style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
-            <div class="kpi-icon" style="background:#DCFCE7;margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="kpi-icon" style="background:var(--success-light);margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             <div class="kpi-label">Kontrak Aktif</div>
             <div class="kpi-value" style="color:var(--success)">${contracts}</div>
             <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--success);font-weight:700">↑ 2</span> bulan ini</div>
@@ -1760,13 +1767,13 @@ function renderOverview(){
         <div class="kpi-sparkline"><canvas id="kpiSparkContract"></canvas></div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-stripe" style="background:var(--blue)"></div>
+        <div class="kpi-stripe" style="background:var(--primary)"></div>
         <div style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
-            <div class="kpi-icon" style="background:#E8F4FD;margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="#0070B7" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <div class="kpi-icon" style="background:var(--primary-light);margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
             <div class="kpi-label">Project Aktif</div>
-            <div class="kpi-value" style="color:var(--blue)">${activePrj}</div>
-            <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--blue);font-weight:700">↑ 1</span> delivery berjalan</div>
+            <div class="kpi-value">${activePrj}</div>
+            <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--primary);font-weight:700">↑ 1</span> delivery berjalan</div>
           </div>
         </div>
         <div class="kpi-sparkline"><canvas id="kpiSparkProject"></canvas></div>
@@ -1775,7 +1782,7 @@ function renderOverview(){
         <div class="kpi-stripe" style="background:var(--warning)"></div>
         <div style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
-            <div class="kpi-icon" style="background:#FEF3C7;margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <div class="kpi-icon" style="background:var(--warning-light);margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
             <div class="kpi-label">Pending Approval</div>
             <div class="kpi-value" style="color:var(--warning)">${pendingAQ}</div>
             <div class="kpi-sub" style="display:flex;align-items:center;gap:4px"><span style="color:var(--warning);font-weight:700">!</span> menunggu review</div>
@@ -1788,26 +1795,26 @@ function renderOverview(){
     <!-- Swasta cards row -->
     <div class="g g3" style="margin-bottom:16px">
       <div class="kpi-card">
-        <div class="kpi-stripe" style="background:#7C3AED"></div>
-        <div class="kpi-icon" style="background:#F3E8FF"><svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="kpi-stripe" style="background:var(--primary)"></div>
+        <div class="kpi-icon" style="background:var(--primary-light)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
         <div class="kpi-label">Deal Swasta Aktif</div>
-        <div class="kpi-value" style="color:#7C3AED">${activeSwasta}</div>
+        <div class="kpi-value">${activeSwasta}</div>
         <div class="kpi-sub">${closedSwasta} deal closed</div>
         <div class="kpi-sparkline"><canvas id="kpiSparkSwasta"></canvas></div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-stripe" style="background:#0891B2"></div>
-        <div class="kpi-icon" style="background:#CFFAFE"><svg viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="kpi-stripe" style="background:var(--primary)"></div>
+        <div class="kpi-icon" style="background:var(--primary-light)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
         <div class="kpi-label">Total Pipeline Swasta</div>
-        <div class="kpi-value" style="font-size:19px;color:#0891B2">Rp ${fmt(totalSwasta)} Jt</div>
+        <div class="kpi-value" style="font-size:19px">Rp ${fmt(totalSwasta)} Jt</div>
         <div class="kpi-sub">Nilai deal swasta</div>
         <div class="kpi-sparkline"><canvas id="kpiSparkSwastaPipe"></canvas></div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-stripe" style="background:#DB2777"></div>
-        <div class="kpi-icon" style="background:#FCE7F3"><svg viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="kpi-stripe" style="background:var(--success)"></div>
+        <div class="kpi-icon" style="background:var(--success-light)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <div class="kpi-label">Avg Conversion</div>
-        <div class="kpi-value" style="color:#DB2777">${Math.round(BRANCHES_BASE.reduce((a,b)=>a+b.conversion,0)/BRANCHES_BASE.length)}%</div>
+        <div class="kpi-value" style="color:var(--success)">${Math.round(BRANCHES_BASE.reduce((a,b)=>a+b.conversion,0)/BRANCHES_BASE.length)}%</div>
         <div class="kpi-sub">Rata-rata semua cabang</div>
         <div class="kpi-sparkline"><canvas id="kpiSparkConversion"></canvas></div>
       </div>
