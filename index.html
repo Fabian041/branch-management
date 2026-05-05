@@ -3974,7 +3974,7 @@ function renderRecoCards(el, recos){
               <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:8px">Langkah Aksi</div>
               <div style="display:grid;gap:6px">
                 ${actions.map((a,ai)=>{const isChecked=savedChecks[ai]===true;return `<label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;user-select:none" onclick="toggleActionCheck(this,'${uid}',${ai})">
-                  <div style="width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border);background:${isChecked?'var(--primary)':'var(--card)'};flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.15s" class="action-checkbox">
+                  <div style="width:15px;height:15px;border-radius:3px;border:1.5px solid ${isChecked?'var(--primary)':'var(--text-muted)'};background:${isChecked?'var(--primary)':'var(--card)'};flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.15s" class="action-checkbox">
                     <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" style="display:${isChecked?'block':'none'}" class="check-icon"><polyline points="2 6 5 9 10 3"/></svg>
                   </div>
                   <span style="font-size:12px;color:${isChecked?'var(--text-muted)':'var(--text)'};text-decoration:${isChecked?'line-through':'none'};line-height:1.5" class="action-text">${a}</span>
@@ -4141,17 +4141,17 @@ function toggleActionCheck(label,uid,actionIdx){
   const s=getComputedStyle(document.documentElement);
   if(checked){
     icon.style.display='none';
-    box.style.background=s.getPropertyValue('--reco-checkbox-bg').trim();
-    box.style.borderColor=s.getPropertyValue('--reco-checkbox-border').trim();
+    box.style.background=s.getPropertyValue('--card').trim();
+    box.style.borderColor=s.getPropertyValue('--text-muted').trim();
     txt.style.textDecoration='none';
-    txt.style.color=s.getPropertyValue('--reco-action-text').trim();
+    txt.style.color=s.getPropertyValue('--text').trim();
     saveRecoCheckState(uid,actionIdx,false);
   }else{
     icon.style.display='block';
-    box.style.background=s.getPropertyValue('--reco-chevron-bg').trim();
-    box.style.borderColor=s.getPropertyValue('--reco-action-label').trim();
+    box.style.background=s.getPropertyValue('--primary').trim();
+    box.style.borderColor=s.getPropertyValue('--primary').trim();
     txt.style.textDecoration='line-through';
-    txt.style.color=s.getPropertyValue('--reco-action-text-done').trim();
+    txt.style.color=s.getPropertyValue('--text-muted').trim();
     saveRecoCheckState(uid,actionIdx,true);
     // Check if all actions done
     const allCheckboxes=label.closest('.action-list-wrap').querySelectorAll('.check-icon');
